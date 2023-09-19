@@ -2,7 +2,7 @@
 Author: Leonardo de la Mora Caceres
 Student number: 152877205
 Email: lde-la-mora-canceres@myseneca.ca
-Date of completion: 15-September-2023
+Date of completion: 18-September-2023
 
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -14,18 +14,21 @@ that my professor provided to complete my workshops and assignments.
 extern double g_taxrate, g_discount;
 
 namespace sdds {
-	const int NameMaxLen = 10,
-		DetailsMaxLen = 25;
+	const int NameMaxLen = 10;
+
 	class RideRequest {
-		char name[NameMaxLen]{},
-			details[DetailsMaxLen]{};
+		char name[NameMaxLen]{};
 		double price{};
 		bool discount{};
+		char* details{};
 
 		void reset();
 
 	public:
 		RideRequest();
+		RideRequest(const RideRequest& other);
+		RideRequest& operator=(const RideRequest& other);
+		~RideRequest();
 		void read(std::istream& is = std::cin);
 		void display(std::ostream& os = std::cout) const;
 	};
