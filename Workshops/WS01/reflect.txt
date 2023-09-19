@@ -1,0 +1,39 @@
+/***********************************************************************
+Author: Leonardo de la Mora Caceres
+Student number: 152877205
+Email: lde-la-mora-canceres@myseneca.ca
+Date of completion: 18-September-2023
+***********************************************************************/
+
+Workshop 1 provided an opportunity to dive into various aspects of C++
+programming and reinforced fundamental concepts. It facilitated a deeper 
+understanding of working with command-line arguments, header file 
+organization, and dynamic memory allocation. By completing this workshop, 
+I achieved several learning outcomes:
+
+Primarily, the use command-line arguments using argc and argv parameters 
+in the main function. This allowed me to accept and process input file 
+names, showcasing my ability to receive program arguments from the 
+command line effectively.
+
+Also, the importance of header guards, ensuring that header files are 
+included only once in a translation unit. This practice not only prevents 
+errors but also promotes clean and organized code, aligning with good 
+programming practices.
+
+Next, understanding the distinction between internal and external linkage
+was a pivotal point of learning. The global variables, g_taxrate and 
+g_discount, served as practical examples of external linkage, highlighting 
+how data can be shared across different translation units.
+
+Later, the workshop's second part focused on dynamic memory allocation, 
+which is essential skill for managing strings of varying lengths 
+efficiently. Utilizing dynamic memory allocation with new and proper 
+memory deallocation with delete were crucial in preventing memory leaks.
+
+In conclusion, Workshop 1 significantly enriched my understanding of C++ 
+programming concepts and techniques, aligning with the previosly stated 
+learning outcomes. It equipped me with practical skills related to 
+command-line processing, header file management, linkage, and dynamic 
+memory allocation, which are fundamental for professional software 
+development.
