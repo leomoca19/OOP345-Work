@@ -2,16 +2,6 @@
 // Hina Tariq - 2023/03/06
 // Cornel - 2023/09/08
 
-/***********************************************************************
-Author: Leonardo de la Mora Caceres
-Student number: 152877205
-Email: lde-la-mora-canceres@myseneca.ca
-Date of completion: 15-September-2023
-
-I have done all the coding by myself and only copied the code
-that my professor provided to complete my workshops and assignments.
-***********************************************************************/
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -39,7 +29,7 @@ int cout = 0; // won't compile if headers don't follow convention regarding name
 
 // TODO: write the prototype for the main function
 //         to accept command line arguments
-int main(int argc, char* argv[])
+???
 {
 	std::cout << "Command Line:\n";
 	std::cout << "--------------------------\n";
@@ -49,9 +39,7 @@ int main(int argc, char* argv[])
 	//   3: third argument
 	//   ...
 	// Don't use "magic numbers": https://en.wikipedia.org/wiki/Magic_number_(programming)
-	for (int i = 0; i < argc; i++) {
-		std::cout << "  " << i + 1 << ": " << argv[i] << '\n';
-	}
+	???
 	std::cout << "--------------------------\n\n";
 
 	// Keep a record of the *Home* rides separately
