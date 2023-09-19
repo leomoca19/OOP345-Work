@@ -31,8 +31,9 @@
 *.out
 *.app
 
-
-#Visual studio files
-*.sln
-*.vcxproj*
-*.vs
+# Visual studio files for Workshops and Final Project
+Workshops/WS*/p*/.vs/
+Workshops/WS*/p*/x64/
+Workshops/WS*/p*/*.sln
+Workshops/WS*/p*/*.exe
+Workshops/WS*/p*/*.vcxproj*
