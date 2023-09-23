@@ -30,6 +30,7 @@ namespace sdds {
 				left << setw(30) << m_latitude << "\n" <<
 				right << setw(20) << "Longitude" << " : " <<
 				left << setw(30) << m_longitude << '\n';
+			os.fill(' ');
 		}
 		else cout << "Empty Airport";
 
@@ -138,6 +139,11 @@ namespace sdds {
 	{
 		*this = other;
 	}
+	AirportLog::AirportLog(AirportLog&& other) noexcept :
+		m_airportArr{}, m_size{}
+	{
+		*this = move(other);
+	}
 	AirportLog& AirportLog::operator=(const AirportLog& other)
 	{
 		if (this != &other) {
@@ -147,6 +153,20 @@ namespace sdds {
 			m_airportArr = new Airport[m_size];
 			for (size_t i = 0; i < m_size; i++)
 				m_airportArr[i] = other.m_airportArr[i];
+
+		}
+		return *this;
+	}
+	AirportLog& AirportLog::operator=(AirportLog&& other) noexcept
+	{
+		if (this != &other) {
+			delete[] m_airportArr;
+
+			m_size = other.m_size;
+			m_airportArr = other.m_airportArr;
+
+			other.m_airportArr = nullptr;
+			other.m_size = 0;
 		}
 		return *this;
 	}
@@ -180,7 +200,7 @@ namespace sdds {
 	}
 	Airport AirportLog::operator[](size_t i)
 	{
-		static Airport temp{};
+		Airport temp{};
 		if (i < m_size)
 			temp = m_airportArr[i];
 		return temp;

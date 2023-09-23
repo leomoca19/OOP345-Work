@@ -53,7 +53,10 @@ namespace sdds {
 		AirportLog();
 		AirportLog(const char* fname);
 		AirportLog(const AirportLog& other);
+		AirportLog(AirportLog&& other) noexcept;
 		AirportLog& operator=(const AirportLog& other);
+		AirportLog& operator=(AirportLog&& other) noexcept;
+
 		~AirportLog();
 
 		void addAirport(const Airport& other);
