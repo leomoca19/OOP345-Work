@@ -51,15 +51,15 @@ namespace sdds {
 
 	public:
 		AirportLog();
-		//AirportLog(Airport* airport, size_t size);
 		AirportLog(const char* fname);
-
+		AirportLog(const AirportLog& other);
+		AirportLog& operator=(const AirportLog& other);
 		~AirportLog();
 
 		void addAirport(const Airport& other);
 		AirportLog findAirport(const char* state, const char* country) const;
 
-		Airport& operator[](size_t i);
+		Airport operator[](size_t i);
 		operator size_t();
 	};
 }

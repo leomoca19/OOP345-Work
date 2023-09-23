@@ -134,6 +134,22 @@ namespace sdds {
 			fptr.close();
 		}
 	}
+	AirportLog::AirportLog(const AirportLog& other)
+	{
+		*this = other;
+	}
+	AirportLog& AirportLog::operator=(const AirportLog& other)
+	{
+		if (this != &other) {
+			m_size = other.m_size;
+
+			delete[] m_airportArr;
+			m_airportArr = new Airport[m_size];
+			for (size_t i = 0; i < m_size; i++)
+				m_airportArr[i] = other.m_airportArr[i];
+		}
+		return *this;
+	}
 	AirportLog::~AirportLog()
 	{
 		delete[] m_airportArr;
@@ -160,19 +176,14 @@ namespace sdds {
 			if (m_airportArr[i].getState() == state && m_airportArr[i].getCountry() == country)
 				foundAirports.addAirport(m_airportArr[i]);
 
-		//DEBUG
-		//cout << "\nwatching dynamic array\n";
-		//for (size_t i = 0; i < foundAirports.m_size; i++)
-		//{
-		//	cout << i + 1 << "\n" << foundAirports.m_airportArr[i] << '\n';
-		//}
-		//cout << "-----------------------------------------------\n\n";
-
 		return foundAirports;
 	}
-	Airport& AirportLog::operator[](size_t i)
+	Airport AirportLog::operator[](size_t i)
 	{
-		return (i < m_size) ? m_airportArr[i] : static_cast<Airport&>(Airport());
+		static Airport temp{};
+		if (i < m_size)
+			temp = m_airportArr[i];
+		return temp;
 	}
 	AirportLog::operator size_t()
 	{
