@@ -1,0 +1,14 @@
+/***********************************************************************
+Author: Leonardo de la Mora Caceres
+Student number: 152877205
+Email: lde-la-mora-canceres@myseneca.ca
+Date of completion: 22-September-2023
+***********************************************************************/
+
+In completing this workshop successfully, I've acquired valuable skills. I can now retrieve records from text files using input file stream objects, count the records efficiently, and monitor task execution time using the std::chrono library. Additionally, I've mastered the intricate concepts of copy and move semantics for classes with resources. I've learned to identify resource-intensive operations in copy and move assignments, which is crucial for optimizing code.
+
+One notable observation during the workshop was the significant time difference between copy and move operations. This distinction arises from the nature of these operations. Copying involves duplicating resources, leading to increased time consumption, while moving efficiently transfers resource ownership.
+
+Regarding the AirportLog constructor, my approach involved initially counting the records and then populating the dynamic array. Although this requires reading the file twice, it's necessary for accurately sizing the array, and there's no straightforward way to avoid this.
+
+In terms of the chrono library, I used a steady_clock to capture timestamps. Upon research, I discovered that a steady_clock differs from a system_clock. The former provides precise and consistent timing, making it ideal for measuring elapsed time intervals, while the latter may be influenced by system adjustments like daylight saving time. The choice depends on specific timing requirements.
