@@ -20,7 +20,7 @@ namespace sdds {
 	ostream& Book::print(ostream& os) const
 	{
 		os.setf(ios::right); os.setf(ios::fixed); 
-		os.width(m_numChapters > 9 ? 51 : 50);
+		os.width(m_numChapters > 9 ? 50 : 51);
 		os << m_title << ',' << m_numChapters << ',' << m_numPages << " | (";
 
 		os.precision(6);
