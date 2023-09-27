@@ -20,11 +20,6 @@ namespace sdds {
 		Book();
 		Book(const std::string& title, unsigned nChapters, unsigned nPages);
 
-		// TODO: In completing Part 1, add here the missing 
-		// member prototypes that would be necessary for the 
-		// Collection module code and tester module w3_p1.cpp 
-		// to manage Book-type objects. 
-
 		/// <summary>
 		/// True if the title is not empty (has at least one character), it has at least one chapter, and it has at least one page
 		/// </summary>

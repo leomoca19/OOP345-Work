@@ -19,14 +19,18 @@ namespace sdds {
 	}
 	ostream& Book::print(ostream& os) const
 	{
-		os.setf(ios::right); os.setf(ios::fixed); 
-		os.width(m_numChapters > 9 ? 50 : 51);
-		os << m_title << ',' << m_numChapters << ',' << m_numPages << " | (";
+		if (*this) {
+			os.setf(ios::right); os.setf(ios::fixed);
+			os.width(m_numChapters > 9 ? 49 : 50);
+			os << m_title << ',' << m_numChapters << ',' << m_numPages << " | (";
 
-		os.precision(6);
-		os << (double)m_numPages / m_numChapters << ")\t";
+			os.precision(6);
+			os << (double)m_numPages / m_numChapters << ")    ";
 
-		os.unsetf(ios::right);
+			os.unsetf(ios::right);
+		}
+		else 
+			cout << "| Invalid book data";
 
 		return os;
 	}
