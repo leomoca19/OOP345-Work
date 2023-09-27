@@ -48,12 +48,12 @@ namespace sdds {
 				std::cout << m_items[i] << ',';
 
 			//prints last item without comma after
-			return std::cout << m_items[m_size - 1] << ']';
+			return std::cout << m_items[m_size - 1] << "]\n";
 		}
 
 		bool operator+=(const T& newItem) {
 			bool added{};
-			if (added = m_size < C) 
+			if ((added = m_size < C))
 			{
 				if (newItem < m_smallestItem)
 					setSmallestItem(newItem);
