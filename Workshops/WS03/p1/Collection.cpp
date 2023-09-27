@@ -10,5 +10,15 @@ that my professor provided to complete my workshops and assignments.
 #include "Collection.h"
 using namespace std;
 namespace sdds {
+	//template <typename T, unsigned C>
+	//ostream& Collection<T, C>::print(ostream& os) const {
+	//	cout << '[';
 
+	//	//prints the item and a comma for all but last item
+	//	for (size_t i = 0; i < m_size - 1; i++)
+	//		cout << m_items[i] << ',';
+
+	//	//prints last item without comma after
+	//	return cout << m_items[i] << ']';
+	//}
 }
