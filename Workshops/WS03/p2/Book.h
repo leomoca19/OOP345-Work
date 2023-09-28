@@ -27,6 +27,8 @@ namespace sdds {
 
 		Book& operator=(const Book& other);
 
+		double pagesOverChapters() const;
+
 		std::ostream& print(std::ostream& os = std::cout) const;
 	};
 	std::ostream& operator<<(std::ostream& os, const Book& bk);
