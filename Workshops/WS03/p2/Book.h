@@ -27,6 +27,9 @@ namespace sdds {
 
 		Book& operator=(const Book& other);
 
+		/// <summary>
+		/// devides the number of pages over the number of chapters and returns int as a double
+		/// </summary>
 		double pagesOverChapters() const;
 
 		std::ostream& print(std::ostream& os = std::cout) const;
