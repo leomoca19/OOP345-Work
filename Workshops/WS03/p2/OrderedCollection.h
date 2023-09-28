@@ -14,19 +14,12 @@ namespace sdds {
 	template <typename T>
 	class OrderedCollection : public Collection<T, 72> {
 	public:
-		bool operator+=(const T& newItem) {
-			bool added{};
-			size_t i;
-			if ((added = size() < capacity)) {
-				//sort m_items
-
-				//loop until !(m_items[i] < newItem)
-
-				//push all elements back and add newItem to m_items
-			}
-
-			return added;
-		}
+        bool operator+=(const T& newItem) {
+            bool added{};
+            if(added = Collection<T, 72>::operator+=(newItem))
+                sortItems();
+            return added;
+        }
 	};
 }
 #endif // !SDDS_ORDEREDCOLLECTION_H
