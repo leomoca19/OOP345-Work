@@ -65,7 +65,7 @@ namespace sdds {
 			}
 			return added;
 		}
-		T operator[](const size_t& i) const { //check if should be const
+		T operator[](const size_t& i) const {
 			T temp;
 			if (i < m_size)
 				temp = m_items[i];
