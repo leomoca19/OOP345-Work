@@ -15,10 +15,7 @@ namespace sdds {
 	class OrderedCollection : public Collection<T, 72> {
 	public:
         bool operator+=(const T& newItem) {
-            bool added{};
-            if(added = Collection<T, 72>::operator+=(newItem))
-                sortItems();
-            return added;
+            return Collection<T, 72>::operator+=(newItem);
         }
 	};
 }

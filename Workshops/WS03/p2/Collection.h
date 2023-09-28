@@ -20,18 +20,6 @@ namespace sdds {
 		static T m_largestItem;
 
 	protected:
-		void sortItems() {
-			T temp;
-			for (size_t i{}; i < size() - 1; i++) {
-				for (size_t j{}; j < size() - i - 1; j++) {
-					if (m_items[j] > m_items[j + 1]) {
-						temp = m_items[j];
-						m_items[j] = m_items[j + 1];
-						m_items[j + 1] = temp;
-					}
-				}
-			}
-		}
 		void setSmallestItem(const T& newSmallest) {
 			if (newSmallest < m_smallestItem)
 				m_smallestItem = newSmallest;
@@ -53,7 +41,7 @@ namespace sdds {
 
 		size_t size() const { return m_size; }
 		size_t capacity() const { return C; }
-		std::ostream& print(std::ostream& os) const {
+		std::ostream& print(std::ostream& os) {
 			std::cout << '[';
 
 			//prints the item and a comma for all but last item
@@ -109,7 +97,7 @@ namespace sdds {
 	Book Collection<Book, 72>::m_largestItem = Book("", 1000, 1);
 
 	template<>
-	std::ostream& Collection<Book, 10>::print(std::ostream& os) const {
+	std::ostream& Collection<Book, 10>::print(std::ostream& os) {
 		os << "| ---------------------------------------------------------------------------|\n";	
 		for (size_t i = 0; i < m_size; i++)
 			m_items[i].print(os << "| ") << " |\n"; //ugly but works
@@ -118,8 +106,17 @@ namespace sdds {
 			os <<"| ---------------------------------------------------------------------------|\n";
 	}
 	template<>
-	std::ostream& Collection<Book, 72>::print(std::ostream& os) const {
-		//sort before printing here
+	std::ostream& Collection<Book, 72>::print(std::ostream& os)  {
+		Book temp;
+		for (size_t i = 0; i < size() - 1; i++) {
+			for (size_t j = 0; j < size() - i - 1; j++) {
+				if (m_items[j].pagesOverChapters() > m_items[j + 1].pagesOverChapters()) {
+					temp = m_items[j];
+					m_items[j] = m_items[j + 1];
+					m_items[j + 1] = temp;
+				}
+			}
+		}
 
 		os << "| ---------------------------------------------------------------------------|\n";
 		for (size_t i = 0; i < m_size; i++)
