@@ -26,9 +26,9 @@ namespace sdds {
 		}
 		return *this;
 	}
-	double Book::pagesOverChapters() const
+	Book::operator double() const
 	{
-		return m_numPages / m_numChapters;
+		return (double)m_numPages / m_numChapters;
 	}
 	ostream& Book::print(ostream& os) const
 	{
