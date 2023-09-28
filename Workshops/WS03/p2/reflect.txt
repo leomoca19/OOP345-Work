@@ -1,0 +1,25 @@
+/***********************************************************************
+Author: Leonardo de la Mora Caceres
+Student number: 152877205
+Email: lde-la-mora-canceres@myseneca.ca
+Date of completion: 28-September-2023
+***********************************************************************/
+In Workshop 3, I delved into the world of class templates, learning how to design and implement them effectively. The workshop encompassed various concepts, including the templating of class variables and specialization for particular types. Additionally, I explored the instantiation of template classes, specialized member functions within templated classes, and the inheritance of one templated class into another.
+
+The workshop commenced with Part 1, where I tackled the Collection class module. This class template was designed to manage a statically-allocated array of elements, offering flexibility for different data types and capacities. The Collection class boasted two template parameters: T for the element type and C for the maximum capacity. This template allowed me to create collections for various data types and sizes.
+
+One key aspect of the Collection class was its ability to keep track of its own capacity, size, smallest item, and largest item through private and protected members. These attributes provided essential information about the collection's state. Notably, the smallest and largest items were monitored across all class objects, contributing to a comprehensive understanding of the data.
+
+Within the Collection class, I implemented several essential public members. The getSmallestItem() and getLargestItem() functions enabled the retrieval of the smallest and largest items stored in the class attribute, respectively. Additionally, the size() and capacity() functions provided information about the current number of items and the collection's capacity. The operator+=() function allowed items to be added to the collection, updating the smallest and largest items as needed. Lastly, the print() function facilitated the display of all items in the collection in a well-formatted manner.
+
+Part 1 also included template specializations for the m_smallestItem and m_largestItem objects when T was Book and C was 10. These specializations initialized these objects with specific values, tailoring the behavior of the Collection class for this particular configuration.
+
+Moving on to Part 2, I encountered the OrderedCollection class. This class was derived from the Collection class and introduced a crucial feature: maintaining its items in ascending order. The OrderedCollection class was designed to work with a single template parameter, T.
+
+The primary public member of the OrderedCollection class was a shadowed operator+=() function. This function was responsible for inserting received items into the m_items array at the appropriate index, ensuring that the elements remained in ascending order after insertion. This feature added a layer of complexity and functionality to the class, making it a valuable extension of the Collection class.
+
+In my journey through Workshop 3, I encountered several valuable lessons. First, I gained a deeper understanding of class templates and their versatility in accommodating various data types and configurations. Second, I grasped the importance of specialization in customizing class behavior for specific scenarios, such as the Book specialization in this workshop. Lastly, I appreciated the power of inheritance in creating derived classes that build upon the functionality of their parent classes.
+
+While working on this workshop, I encountered a few challenges, such as ensuring proper template specialization and understanding the intricacies of shadowing functions in derived classes. However, by referring to the course materials and leveraging my problem-solving skills, I was able to overcome these obstacles and successfully complete the workshop.
+
+In conclusion, Workshop 3 provided a comprehensive exploration of class templates and their applications. From designing flexible collection classes to specialized implementations and derived classes, the workshop expanded my knowledge of C++ templates and their real-world usage. The experience enhanced my programming skills and deepened my appreciation for the versatility of templates in modern software development.
