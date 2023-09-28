@@ -20,18 +20,6 @@ namespace sdds {
 		static T m_largestItem;
 
 	protected:
-		void sortItems() const {
-			T temp;
-			for (size_t i{}; i < size() - 1; i++) {
-				for (size_t j{}; j < size() - i - 1; j++) {
-					if (m_items[j] > m_items[j + 1]) {
-						temp = m_items[j];
-						m_items[j] = m_items[j + 1];
-						m_items[j + 1] = temp;
-					}
-				}
-			}
-		}
 		void setSmallestItem(const T& newSmallest) {
 			if (newSmallest < m_smallestItem)
 				m_smallestItem = newSmallest;
