@@ -119,8 +119,14 @@ namespace sdds {
 	}
 	template<>
 	std::ostream& Collection<Book, 72>::print(std::ostream& os) const {
-		throw "I still have ot implement this";
-		return os;
+		//sort before printing here
+
+		os << "| ---------------------------------------------------------------------------|\n";
+		for (size_t i = 0; i < m_size; i++)
+			m_items[i].print(os << "| ") << " |\n"; //ugly but works
+
+		return
+			os << "| ---------------------------------------------------------------------------|\n";
 	}
 }
 #endif // !SDDS_COLLECTION_H
