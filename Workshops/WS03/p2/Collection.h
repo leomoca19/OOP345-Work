@@ -19,6 +19,10 @@ namespace sdds {
 		static T m_smallestItem;
 		static T m_largestItem;
 
+		void formatToPrecision1() {
+			std::cout.setf(std::ios::fixed);
+			std::cout.precision(1);
+		}
 	protected:
 		void setSmallestItem(const T& newSmallest) {
 			if (newSmallest < m_smallestItem)
@@ -74,11 +78,6 @@ namespace sdds {
 
 		void incrSize() { m_size++; }
 	};
-
-	void formatToPrecision1() {
-		std::cout.setf(std::ios::fixed);
-		std::cout.precision(1);
-	}
 
 	template <typename T, unsigned C>
 	T Collection<T, C>::m_smallestItem = 9999;
