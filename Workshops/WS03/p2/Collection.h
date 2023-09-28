@@ -98,18 +98,12 @@ namespace sdds {
 
 	template<>
 	std::ostream& Collection<Book, 10>::print(std::ostream& os) const {
-		throw "I still have ot implement this";
-		/* This should be thoe output, this function is in charged of printing each of these chars
-		| ---------------------------------------------------------------------------|
-		|          Software Architecture for Busy Developers,7,174 | (24.857143)     |
-		|      Low-Code Application Development with Appian,16,462 | (28.875000)     |
-		|       Natural Language Processing with TensorFlow,11,514 | (46.727273)     |
-		|                                   Learning DevOps,17,560 | (32.941176)     |
-		|                             SQL for Data Analytics,9,540 | (60.000000)     |
-		|  Deciphering Object-Oriented Programming with C++,21,594 | (28.285714)     |
-		| ---------------------------------------------------------------------------|
-		*/
-		return os;
+		os << "| ---------------------------------------------------------------------------|\n";	
+		for (size_t i = 0; i < m_size; i++)
+			m_items[i].print(os << "| ") << " |\n"; //ugly but works
+
+		return 
+			os <<"| ---------------------------------------------------------------------------|\n";
 	}
 	template<>
 	std::ostream& Collection<Book, 72>::print(std::ostream& os) const {
