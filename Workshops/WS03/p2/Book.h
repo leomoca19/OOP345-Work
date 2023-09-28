@@ -25,16 +25,7 @@ namespace sdds {
 		/// </summary>
 		operator bool()const;
 
-
-
-		
-		// In completing Part 2, add here the missing 
-		// member prototypes that would be necessary for 
-		// OrderedCollection module code and tester module 
-		// w3_p2.cpp to manage Book-type object. 
-		//
-		// Write the implementations of these functions 
-		// in Book.cpp file
+		Book& operator=(const Book& other);
 
 		std::ostream& print(std::ostream& os = std::cout) const;
 	};
