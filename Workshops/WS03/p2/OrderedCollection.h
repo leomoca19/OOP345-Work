@@ -15,7 +15,17 @@ namespace sdds {
 	class OrderedCollection : public Collection<T, 72> {
 	public:
         bool operator+=(const T& newItem) {
-            return Collection<T, 72>::operator+=(newItem);
+			bool added{};
+			if ((added = size() < capacity()))
+			{
+				if (newItem < getSmallestItem())
+					setSmallestItem(newItem);
+				else if (newItem > getLargestItem())
+					setLargestItem(newItem);
+
+				addItem(newItem);
+			}
+			return added;
         }
 	};
 }

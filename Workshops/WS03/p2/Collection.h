@@ -33,7 +33,7 @@ namespace sdds {
 				m_largestItem = newLargest;
 		}	
 		void addItem(const T& newItem) {
-			m_items += newItem;
+			Collection::operator+=(newItem);
 		}
 		
 	public:
@@ -112,7 +112,7 @@ namespace sdds {
 		Book temp;
 		for (size_t i = 0; i < size() - 1; i++) {
 			for (size_t j = 0; j < size() - i - 1; j++) {
-				if ((double)m_items[j] > (double)m_items[j + 1]) {
+				if (m_items[j] > m_items[j + 1]) {
 					temp = m_items[j];
 					m_items[j] = m_items[j + 1];
 					m_items[j + 1] = temp;

@@ -13,10 +13,12 @@ namespace sdds {
 	Book::Book(const string& title, unsigned nChapters, unsigned nPages) : 
 		m_title(title), m_numChapters(nChapters), m_numPages(nPages){}
 	Book::Book(){}
+
 	Book::operator bool() const
 	{
 		return m_title[0] != '\0' && m_numChapters > 0 && m_numPages > 0;
 	}
+
 	Book& Book::operator=(const Book& other)
 	{
 		if (this != &other) {
@@ -26,10 +28,22 @@ namespace sdds {
 		}
 		return *this;
 	}
-	Book::operator double() const
+
+	bool Book::operator<(const Book& other) const
 	{
-		return (double)m_numPages / m_numChapters;
+		return pgsPerChptrs() < other.pgsPerChptrs();
 	}
+
+	bool Book::operator>(const Book& other) const
+	{
+		return other < *this;
+	}
+
+	double Book::pgsPerChptrs() const
+	{
+		return (double)m_numPages/m_numChapters;
+	}
+
 	ostream& Book::print(ostream& os) const
 	{
 		if (*this) {
@@ -38,7 +52,7 @@ namespace sdds {
 			os << m_title << ',' << m_numChapters << ',' << m_numPages << " | (";
 
 			os.precision(6);
-			os << (double)m_numPages / m_numChapters << ")    ";
+			os << pgsPerChptrs() << ")    ";
 
 			os.unsetf(ios::right);
 		}

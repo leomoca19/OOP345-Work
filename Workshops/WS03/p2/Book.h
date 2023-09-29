@@ -26,11 +26,10 @@ namespace sdds {
 		operator bool()const;
 
 		Book& operator=(const Book& other);
+		bool operator<(const Book& other) const;
+		bool operator>(const Book& other) const;
 
-		/// <summary>
-		/// devides the number of pages over the number of chapters and returns int as a double
-		/// </summary>
-		operator double() const;
+		double pgsPerChptrs() const;
 
 		std::ostream& print(std::ostream& os = std::cout) const;
 	};
