@@ -16,14 +16,14 @@ namespace sdds {
 	public:
         bool operator+=(const T& newItem) {
 			bool added{};
-			if ((added = size() < capacity()))
+			if ((added = this->size() < this->capacity()))
 			{
-				if (newItem < getSmallestItem())
-					setSmallestItem(newItem);
-				else if (newItem > getLargestItem())
-					setLargestItem(newItem);
+				if (newItem < this->getSmallestItem())
+					this->setSmallestItem(newItem);
+				else if (newItem > this->getLargestItem())
+					this->setLargestItem(newItem);
 
-				addItem(newItem);
+				this->addItem(newItem);
 			}
 			return added;
         }
