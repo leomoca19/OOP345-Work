@@ -49,6 +49,17 @@ namespace sdds {
 		size_t size() const { return m_size; }
 		size_t capacity() const { return C; }
 		std::ostream& print(std::ostream& os) {
+			double temp;
+			for (size_t i = 0; i < size() - 1; i++) {
+				for (size_t j = 0; j < size() - i - 1; j++) {
+					if (m_items[j] > m_items[j + 1]) {
+						temp = m_items[j];
+						m_items[j] = m_items[j + 1];
+						m_items[j + 1] = temp;
+					}
+				}
+			}
+
 			std::cout << '[';
 
 			//prints the item and a comma for all but last item
