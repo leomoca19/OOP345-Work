@@ -48,5 +48,6 @@ namespace sdds {
 		double price() const;
 		std::string& getFeatures() const;
 	};
+	//add << and >> operators, print and read methods
 }
 #endif
