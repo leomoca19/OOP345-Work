@@ -17,7 +17,6 @@ namespace sdds {
 		size_t weight{};
 		double price{};
 		std::string features{};
-
 	};
 }
 #endif
