@@ -21,6 +21,7 @@ namespace sdds {
 	public:
 		//Default constructor and a constructor that receives a string, is responsible for extracting information about the cheese from string and storing the tokens in the properties. String will have the format: Name,Weight,Price,Features
 		Cheese(const std::string& str = "");
+		Cheese(const Cheese& other);
 
 		//Receives a weight/amount of cheese to slice from the current object.
 		// If there is enough cheese, return a copy of current cheese with the desired weight. 
@@ -34,6 +35,8 @@ namespace sdds {
 		std::string getFeatures() const;
 
 		std::ostream& print(std::ostream& os = std::cout) const;
+
+		Cheese& operator=(const Cheese& other);
 	};
 	std::ostream& operator<<(std::ostream& os, const Cheese& right);
 }
