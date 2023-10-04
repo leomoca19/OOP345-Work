@@ -13,10 +13,10 @@ that my professor provided to complete my workshops and assignments.
 #include <string>
 namespace sdds {
 	class Cheese {
-		std::string name{"NaC"};
-		size_t weight{};
-		double price{};
-		std::string features{};
+		std::string m_name{"NaC"};
+		size_t m_weight{};
+		double m_price{};
+		std::string m_features{};
 
 	public:
 		//Default constructor and a constructor that receives a string, is responsible for extracting information about the cheese from string and storing the tokens in the properties. String will have the format: Name,Weight,Price,Features
