@@ -25,15 +25,15 @@ namespace sdds {
 
 			strFirst = temp.find_first_of(letters);
 			strLast = temp.find_last_of(letters);
-			name = temp.substr(strFirst, strLast - strFirst + 1);
+			m_name = temp.substr(strFirst, strLast - strFirst + 1);
 
 			temp = str.substr(commaPos + 1);
 			temp = temp.substr(0, commaPos += (temp.find_first_of(',')) + 1);
-			weight = stoul(temp);
+			m_weight = stoul(temp);
 
 			temp = str.substr(commaPos + 1);
 			temp = temp.substr(0, commaPos += (temp.find_first_of(',')) + 1);
-			price = stod(temp);
+			m_price = stod(temp);
 
 			//won't read the last feature
 			temp = str.substr(commaPos + 1);
@@ -42,7 +42,7 @@ namespace sdds {
 				temp = temp.substr(0, temp.find_first_of(','));
 				strFirst = temp.find_first_of(letters);
 				strLast = temp.find_last_of(letters);
-				features += temp.substr(strFirst, strLast - strFirst + 1) + ' ';
+				m_features += temp.substr(strFirst, strLast - strFirst + 1) + ' ';
 				temp = str.substr(commaPos + 1);
 			}
 
@@ -50,30 +50,33 @@ namespace sdds {
 			temp = str.substr(commaPos + 1);
 			strFirst = temp.find_first_of(letters);
 			strLast = temp.find_last_of(letters);
-			features += temp.substr(strFirst, strLast - strFirst + 1);
+			m_features += temp.substr(strFirst, strLast - strFirst + 1);
 		}
 	}
 
 	Cheese Cheese::slice(size_t weight)
 	{
+		if (weight <= m_weight) {
+
+		}
 		return *this;
 	}
 
 	std::string Cheese::getName() const
 	{
-		return name;
+		return m_name;
 	}
 	size_t Cheese::getWeight() const
 	{
-		return weight;
+		return m_weight;
 	}
 	double Cheese::getPrice() const
 	{
-		return price;
+		return m_price;
 	}
 	std::string Cheese::getFeatures() const
 	{
-		return features;
+		return m_features;
 	}
 
 	ostream& Cheese::print(ostream& os) const
@@ -82,22 +85,22 @@ namespace sdds {
 		{
 			os << '|';
 			os.width(nameW);
-			os << ((name.length() <= nameW) ? name : name.substr(0, nameW)) << '|';
+			os << ((m_name.length() <= nameW) ? m_name : m_name.substr(0, nameW)) << '|';
 
 			os.width(weightW);
-			os << weight << '|';
+			os << m_weight << '|';
 
 			os.width(priceW); os.precision(2);
 			os.setf(ios::fixed);
 			{
-				os << price << '|';
+				os << m_price << '|';
 			}
 			os.unsetf(ios::fixed);
 
 			os.width(featuresW);
 			os.setf(ios::right);
 			{
-				os << ((features.length() <= featuresW) ? features : features.substr(0, featuresW)) << " |\n";
+				os << ((m_features.length() <= featuresW) ? m_features : m_features.substr(0, featuresW)) << " |\n";
 			}
 			os.unsetf(ios::right);
 		}
