@@ -10,7 +10,11 @@ that my professor provided to complete my workshops and assignments.
 #include "Cheese.h"
 using namespace std;
 namespace sdds {
-	string letters{ "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM" };
+	const string letters{ "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM" };
+	const size_t nameW = 21;
+	const size_t weightW = 5;
+	const size_t priceW = 5;
+	const size_t featuresW = 33;
 	Cheese::Cheese(const string& str)
 	{
 		string temp{};
@@ -18,7 +22,6 @@ namespace sdds {
 
 		if(str != "") {
 			temp = str.substr(0, commaPos = str.find_first_of(','));
-			
 
 			strFirst = temp.find_first_of(letters);
 			strLast = temp.find_last_of(letters);
@@ -73,21 +76,37 @@ namespace sdds {
 		return features;
 	}
 
-	std::ostream& Cheese::print(std::ostream& os) const
+	ostream& Cheese::print(ostream& os) const
 	{
+		os.setf(ios::left);
+		{
+			os << '|';
+			os.width(nameW);
+			os << ((name.length() <= nameW) ? name : name.substr(0, nameW)) << '|';
+
+			os.width(weightW);
+			os << weight << '|';
+
+			os.width(priceW); os.precision(2);
+			os.setf(ios::fixed);
+			{
+				os << price << '|';
+			}
+			os.unsetf(ios::fixed);
+
+			os.width(featuresW);
+			os.setf(ios::right);
+			{
+				os << ((features.length() <= featuresW) ? features : features.substr(0, featuresW)) << " |\n";
+			}
+			os.unsetf(ios::right);
+		}
+		os.unsetf(ios::left);
+
 		return os;
 	}
-	std::istream& Cheese::read(std::istream& is)
-	{
-		return is;
-	}
-
-	std::ostream& operator<<(std::ostream& os, const Cheese& right)
+	ostream& operator<<(ostream& os, const Cheese& right)
 	{
 		return right.print(os);
-	}
-	std::istream& operator>>(std::istream& is, Cheese& right)
-	{
-		return right.read(is);
 	}
 }
