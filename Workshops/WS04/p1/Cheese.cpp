@@ -18,7 +18,7 @@ namespace sdds {
 
 		if(str != "") {
 			temp = str.substr(0, commaPos = str.find_first_of(','));
-			//Name,Weight,Price,Features
+			
 
 			strFirst = temp.find_first_of(letters);
 			strLast = temp.find_last_of(letters);
@@ -32,8 +32,22 @@ namespace sdds {
 			temp = temp.substr(0, commaPos += (temp.find_first_of(',')) + 1);
 			price = stod(temp);
 
+			//won't read the last feature
 			temp = str.substr(commaPos + 1);
+			while ((temp.find_first_of(',') != string::npos)) {
+				commaPos += (temp.find_first_of(',')) + 1;
+				temp = temp.substr(0, temp.find_first_of(','));
+				strFirst = temp.find_first_of(letters);
+				strLast = temp.find_last_of(letters);
+				features += temp.substr(strFirst, strLast - strFirst + 1) + ' ';
+				temp = str.substr(commaPos + 1);
+			}
 
+			//read the last feature
+			temp = str.substr(commaPos + 1);
+			strFirst = temp.find_first_of(letters);
+			strLast = temp.find_last_of(letters);
+			features += temp.substr(strFirst, strLast - strFirst + 1);
 		}
 	}
 
