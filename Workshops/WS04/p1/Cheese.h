@@ -49,9 +49,7 @@ namespace sdds {
 		std::string getFeatures() const;
 
 		std::ostream& print(std::ostream& os = std::cout) const;
-		std::istream& read(std::istream& is = std::cin);
 	};
 	std::ostream& operator<<(std::ostream& os, const Cheese& right);
-	std::istream& operator>>(std::istream& is, Cheese& right);
 }
 #endif
