@@ -10,15 +10,31 @@ that my professor provided to complete my workshops and assignments.
 #include "Cheese.h"
 using namespace std;
 namespace sdds {
+	string letters{ "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM" };
 	Cheese::Cheese(const string& str)
 	{
-		//Name,Weight,Price,Features
-		size_t strFirst = str.find_first_not_of(" \t\n\r"),
-			strLast = str.find_first_of(',') - 1;
-		name = str.substr(strFirst, strLast);
+		string temp{};
+		size_t strFirst{}, strLast{}, commaPos{};
 
-		strFirst = str.find_first_not_of(" \t\n\r");
-		strLast = str.find_first_of(',') - 1;
+		if(str != "") {
+			temp = str.substr(0, commaPos = str.find_first_of(','));
+			//Name,Weight,Price,Features
+
+			strFirst = temp.find_first_of(letters);
+			strLast = temp.find_last_of(letters);
+			name = temp.substr(strFirst, strLast - strFirst + 1);
+
+			temp = str.substr(commaPos + 1);
+			temp = temp.substr(0, commaPos += (temp.find_first_of(',')) + 1);
+			weight = stoul(temp);
+
+			temp = str.substr(commaPos + 1);
+			temp = temp.substr(0, commaPos += (temp.find_first_of(',')) + 1);
+			price = stod(temp);
+
+			temp = str.substr(commaPos + 1);
+
+		}
 	}
 
 	Cheese Cheese::slice(size_t weight)
