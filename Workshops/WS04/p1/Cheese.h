@@ -43,11 +43,15 @@ namespace sdds {
 
 
 		//- A set of queries to retrieve the value of each attribute of the cheese.
-		std::string& getName() const;
-		size_t& getWeight() const;
-		double price() const;
-		std::string& getFeatures() const;
+		std::string getName() const;
+		size_t getWeight() const;
+		double getPrice() const;
+		std::string getFeatures() const;
+
+		std::ostream& print(std::ostream& os = std::cout) const;
+		std::istream& read(std::istream& is = std::cin);
 	};
-	//add << and >> operators, print and read methods
+	std::ostream& operator<<(std::ostream& os, const Cheese& right);
+	std::istream& operator>>(std::istream& is, Cheese& right);
 }
 #endif
