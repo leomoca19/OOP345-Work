@@ -62,8 +62,9 @@ namespace sdds {
 	{
 		Cheese temp{};
 		if (weight <= m_weight) {
-			m_weight -= weight;
 			temp = *this;
+			temp.m_weight = weight;
+			m_weight -= weight;
 		}
 		return temp;
 	}
