@@ -197,7 +197,7 @@ Refer to the following reference documents on `std::chrono` to get started (ther
 
 When the program is started with the command:
 ```
-ws airports_data.csv
+ws airport_data.csv
 ```
 the output should look like the one from the `sample_output.txt` file.
 
