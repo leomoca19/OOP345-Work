@@ -20,7 +20,7 @@ namespace sdds {
 		string temp{};
 		size_t strFirst{}, strLast{}, commaPos{};
 
-		if(str != "") {
+		if (str != "") {
 			temp = str.substr(0, commaPos = str.find_first_of(','));
 
 			strFirst = temp.find_first_of(letters);
@@ -53,13 +53,18 @@ namespace sdds {
 			m_features += temp.substr(strFirst, strLast - strFirst + 1);
 		}
 	}
+	Cheese::Cheese(const Cheese& other)
+	{
+		*this = other;
+	}
 
 	Cheese Cheese::slice(size_t weight)
 	{
+		Cheese temp{};
 		if (weight <= m_weight) {
-
+			//temp = ;
 		}
-		return *this;
+		return temp;
 	}
 
 	std::string Cheese::getName() const
@@ -107,6 +112,16 @@ namespace sdds {
 		os.unsetf(ios::left);
 
 		return os;
+	}
+	Cheese& Cheese::operator=(const Cheese& other)
+	{
+		if (this != &other) {
+			m_name = other.m_name;
+			m_weight = other.m_weight;
+			m_price = other.m_price;
+			m_features = other.m_features;
+		}
+		return *this;
 	}
 	ostream& operator<<(ostream& os, const Cheese& right)
 	{
