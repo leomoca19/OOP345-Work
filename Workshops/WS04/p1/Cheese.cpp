@@ -62,7 +62,8 @@ namespace sdds {
 	{
 		Cheese temp{};
 		if (weight <= m_weight) {
-			//temp = ;
+			m_weight -= weight;
+			temp = *this;
 		}
 		return temp;
 	}
@@ -113,6 +114,7 @@ namespace sdds {
 
 		return os;
 	}
+
 	Cheese& Cheese::operator=(const Cheese& other)
 	{
 		if (this != &other) {
@@ -123,6 +125,7 @@ namespace sdds {
 		}
 		return *this;
 	}
+
 	ostream& operator<<(ostream& os, const Cheese& right)
 	{
 		return right.print(os);
