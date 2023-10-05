@@ -1,0 +1,6 @@
+# Files created by visual studio
+*.sln
+*.vs/
+*.vcxproj*
+*x64/
+*.exe
