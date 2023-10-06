@@ -7,9 +7,13 @@ Date of completion: October-6-2023
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
 ***********************************************************************/
-#ifndef SDDS_CHEESE_H
-#define SDDS_CHEESE_H
+#ifndef SDDS_CHEESESHOP_H
+#define SDDS_CHEESESHOP_H
+#include "Cheese.h"
 namespace sdds {
+	class CheeseShop {
+		const Cheese** cheeses;
 
+	};
 }
-#endif //!SDDS_CHEESE_H
+#endif //!SDDS_CHEESESHOP_H
