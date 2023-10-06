@@ -14,7 +14,7 @@ namespace sdds {
 	{
 		return os;
 	}
-	CheeseShop::CheeseShop(const string& name): m_cheeses(), m_name(name), m_size() {}
+	CheeseShop::CheeseShop(const string& name) : m_name(name) {}
 	CheeseShop::~CheeseShop()
 	{
 
