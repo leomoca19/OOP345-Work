@@ -16,15 +16,16 @@ namespace sdds {
 		const Cheese** cheeses;
 		std::string name;
 		size_t size;
+
+		std::ostream& print(std::ostream& os) const;
 	public:
 		CheeseShop(const std::string& name = "No name");
-		CheeseShop(const CheeseShop& other);
-		CheeseShop& operator=(const CheeseShop& other);
 
+		CheeseShop& operator=(const CheeseShop& other);
 		CheeseShop& addCheese(const Cheese& other);
 
 		CheeseShop& operator[](const size_t& i) const;
-		Cheese& operator>>(const Cheese& other);
 	};
+	std::ostream& operator<<(std::ostream& os, const Cheese& other);
 }
 #endif //!SDDS_CHEESESHOP_H
