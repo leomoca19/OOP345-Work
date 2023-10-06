@@ -13,9 +13,9 @@ that my professor provided to complete my workshops and assignments.
 #include "Cheese.h"
 namespace sdds {
 	class CheeseShop {
-		const Cheese** cheeses;
-		std::string name;
-		size_t size;
+		const Cheese** m_cheeses;
+		std::string m_name;
+		size_t m_size;
 
 		std::ostream& print(std::ostream& os) const;
 	public:
