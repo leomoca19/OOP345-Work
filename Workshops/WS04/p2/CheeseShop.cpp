@@ -13,6 +13,10 @@ namespace sdds {
 	CheeseShop::CheeseShop(const string& name) : m_name(name) {}
 	CheeseShop::~CheeseShop()
 	{
+		~*this;
+	}
+	void CheeseShop::operator~()
+	{
 		for (size_t i = m_size; i > 0; i--) {
 			delete m_cheeses[i - 1];
 			m_cheeses[i - 1] = nullptr;
@@ -28,7 +32,9 @@ namespace sdds {
 			m_name = other.m_name;
 
 			delete[] m_cheeses;
-			m_cheeses = new const Cheese* [m_size];
+			//m_cheeses = new const Cheese* [m_size];
+
+			m_cheeses = *other;
 
 			for (size_t i = 0; i < m_size; i++)
 				m_cheeses[i] = other.m_cheeses[i];
