@@ -60,7 +60,7 @@ namespace sdds {
 
 		os << separator << m_name << '\n' << separator;
 
-		os << (m_size) ? "" : "This shop is out of cheese!\n";
+		os << (m_size ? "" : "This shop is out of cheese!\n");
 		for (size_t i = 0; i < m_size; i++) 
 			m_cheeses[i]->print(os);
 
