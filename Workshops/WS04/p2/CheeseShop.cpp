@@ -17,7 +17,12 @@ namespace sdds {
 	CheeseShop::CheeseShop(const string& name) : m_name(name) {}
 	CheeseShop::~CheeseShop()
 	{
-
+		for (size_t i = m_size; i > 0; i++) {
+			delete m_cheeses[i - 1];
+			m_cheeses[i - 1] = nullptr;
+		}
+		delete[] m_cheeses;
+		m_cheeses = nullptr;
 	}
 
 	CheeseShop& CheeseShop::operator=(const CheeseShop& other)
