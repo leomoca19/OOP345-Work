@@ -12,12 +12,22 @@ using namespace std;
 namespace sdds {
 	ostream& CheeseShop::print(ostream& os) const
 	{
+		char separator[] = "--------------------------\n";
+
+		os << separator << m_name << '\n' << separator;
+
+		os << (m_size) ? "" : "This shop is out of cheese!\n";
+		for (size_t i = 0; i < m_size; i++) 
+			m_cheeses[i]->print(os);
+
+		os << separator;
+
 		return os;
 	}
 	CheeseShop::CheeseShop(const string& name) : m_name(name) {}
 	CheeseShop::~CheeseShop()
 	{
-		for (size_t i = m_size; i > 0; i++) {
+		for (size_t i = m_size; i > 0; i--) {
 			delete m_cheeses[i - 1];
 			m_cheeses[i - 1] = nullptr;
 		}
