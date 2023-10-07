@@ -12,7 +12,7 @@ using namespace std;
 namespace sdds {
 	ostream& CheeseShop::print(ostream& os) const
 	{
-		char separator[] = "--------------------------\n";
+		const char separator[] = "--------------------------\n";
 
 		os << separator << m_name << '\n' << separator;
 
