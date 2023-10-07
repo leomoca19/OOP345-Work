@@ -20,6 +20,7 @@ namespace sdds {
 	public:
 		CheeseShop(const std::string& name = "No name");
 		~CheeseShop();
+		void operator~();
 
 		CheeseShop& operator=(const CheeseShop& other);
 		CheeseShop& addCheese(const Cheese& other);
