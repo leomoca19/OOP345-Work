@@ -44,9 +44,11 @@ namespace sdds {
 		return *this;
 	}
 
-	CheeseShop& CheeseShop::operator[](const size_t& i) const
+	Cheese& CheeseShop::operator[](const size_t& i) const
 	{
-		CheeseShop* temp{};
+		Cheese* temp{};
+		if (i <= m_size)
+			temp = m_cheeses[i];
 		return *temp;
 	}
 
