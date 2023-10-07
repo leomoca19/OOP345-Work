@@ -47,7 +47,7 @@ namespace sdds {
 		return (i <= m_size) ? *m_cheeses[i] : static_cast<Cheese>(nullptr);
 	}
 
-	ostream& operator<<(ostream& os, const Cheese& other) {
+	ostream& operator<<(ostream& os, const CheeseShop& other) {
 		return other.print(os);
 	}
 }
