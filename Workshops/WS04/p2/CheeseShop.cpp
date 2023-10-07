@@ -20,9 +20,7 @@ namespace sdds {
 		for (size_t i = 0; i < m_size; i++) 
 			m_cheeses[i]->print(os);
 
-		os << separator;
-
-		return os;
+		return os << separator;
 	}
 	CheeseShop::CheeseShop(const string& name) : m_name(name) {}
 	CheeseShop::~CheeseShop()
@@ -46,10 +44,7 @@ namespace sdds {
 
 	const Cheese& CheeseShop::operator[](const size_t& i) const
 	{
-		const Cheese* temp{};
-		if (i <= m_size)
-			temp = m_cheeses[i];
-		return *temp;
+		return (i <= m_size) ? *m_cheeses[i] : static_cast<Cheese>(nullptr);
 	}
 
 	ostream& operator<<(ostream& os, const Cheese& other) {
