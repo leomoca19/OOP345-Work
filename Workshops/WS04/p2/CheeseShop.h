@@ -25,7 +25,7 @@ namespace sdds {
 		CheeseShop& operator=(const CheeseShop& other);
 		CheeseShop& addCheese(const Cheese& other);
 
-		CheeseShop& operator[](const size_t& i) const;
+		Cheese& operator[](const size_t& i) const;
 	};
 	std::ostream& operator<<(std::ostream& os, const Cheese& other);
 }
