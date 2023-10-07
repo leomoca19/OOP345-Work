@@ -23,7 +23,7 @@ namespace sdds {
 
 	CheeseShop& CheeseShop::operator=(const CheeseShop& other)
 	{
-		if (this == &other) {
+		if (this != &other) {
 			m_size = other.m_size;
 			m_name = other.m_name;
 
@@ -38,10 +38,11 @@ namespace sdds {
 	CheeseShop& CheeseShop::addCheese(const Cheese& other)
 	{
 		const Cheese** cheesesCopy = new const Cheese*[m_size + 1];
-		for (size_t i = 0; i < m_size; i++)
-			cheesesCopy[i] = m_cheeses[i];
+		if(m_size)
+			for (size_t i = 0; i < m_size; i++)
+				cheesesCopy[i] = m_cheeses[i];
 
-		cheesesCopy[++m_size] = new Cheese(other);
+		cheesesCopy[m_size++] = new Cheese(other);
 
 		delete[] m_cheeses;
 		m_cheeses = cheesesCopy;
