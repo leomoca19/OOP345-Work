@@ -19,13 +19,14 @@ namespace sdds {
 
 	public:
 		CheeseShop(const std::string& name = "No name");
+		CheeseShop(const CheeseShop& other);
+		CheeseShop& operator=(const CheeseShop& other);
 		~CheeseShop();
 		void operator~();
 
-		CheeseShop& operator=(const CheeseShop& other);
 		CheeseShop& addCheese(const Cheese& other);
 
-		const Cheese& operator[](const size_t& i) const;
+		//const Cheese& operator[](const size_t& i) const;
 
 		std::ostream& print(std::ostream& os) const;
 	};
