@@ -28,13 +28,11 @@ namespace sdds {
 	CheeseShop& CheeseShop::operator=(const CheeseShop& other)
 	{
 		if (this != &other) {
+			~*this;
 			m_size = other.m_size;
 			m_name = other.m_name;
 
-			delete[] m_cheeses;
-			//m_cheeses = new const Cheese* [m_size];
-
-			m_cheeses = *other;
+			m_cheeses = new const Cheese* [m_size];
 
 			for (size_t i = 0; i < m_size; i++)
 				m_cheeses[i] = other.m_cheeses[i];
@@ -54,11 +52,6 @@ namespace sdds {
 		m_cheeses = cheesesCopy;
 
 		return *this;
-	}
-
-	const Cheese& CheeseShop::operator[](const size_t& i) const
-	{
-		return (i <= m_size) ? *m_cheeses[i] : static_cast<Cheese>(nullptr);
 	}
 
 	ostream& CheeseShop::print(ostream& os) const
