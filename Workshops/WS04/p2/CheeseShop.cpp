@@ -11,6 +11,10 @@ that my professor provided to complete my workshops and assignments.
 using namespace std;
 namespace sdds {
 	CheeseShop::CheeseShop(const string& name) : m_name(name) {}
+	CheeseShop::CheeseShop(const CheeseShop& other)
+	{
+		*this = other;
+	}
 	CheeseShop::~CheeseShop()
 	{
 		~*this;
