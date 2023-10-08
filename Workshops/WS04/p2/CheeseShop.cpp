@@ -15,6 +15,17 @@ namespace sdds {
 	{
 		*this = other;
 	}
+	CheeseShop& CheeseShop::operator=(const CheeseShop& other)
+	{
+		if (this != &other) {
+			~*this;
+			m_name = other.m_name;
+
+			for (size_t i = 0; i < other.m_size; i++)
+				addCheese(*other.m_cheeses[i]);
+		}
+		return *this;
+	}
 	CheeseShop::~CheeseShop()
 	{
 		~*this;
@@ -30,17 +41,6 @@ namespace sdds {
 		m_size = 0;
 	}
 
-	CheeseShop& CheeseShop::operator=(const CheeseShop& other)
-	{
-		if (this != &other) {
-			~*this;
-			m_name = other.m_name;
-
-			for (size_t i = 0; i < other.m_size; i++)
-				addCheese(*other.m_cheeses[i]);
-		}
-		return *this;
-	}
 	CheeseShop& CheeseShop::addCheese(const Cheese& other)
 	{
 		const Cheese** cheesesCopy = new const Cheese*[m_size + 1];
