@@ -15,6 +15,18 @@ namespace sdds {
 	{
 		*this = other;
 	}
+	CheeseShop::CheeseShop(CheeseShop&& other)
+	{
+		*this = move(other);
+	}
+	CheeseShop& CheeseShop::operator=(CheeseShop&& other)
+	{
+		if (this != &other) {
+			*this = other;
+			~other;
+		}
+		return *this;
+	}
 	CheeseShop& CheeseShop::operator=(const CheeseShop& other)
 	{
 		if (this != &other) {
@@ -32,6 +44,7 @@ namespace sdds {
 	}
 	void CheeseShop::operator~()
 	{
+		m_name.clear();
 		for (size_t i = m_size; i > 0; i--) {
 			delete m_cheeses[i - 1];
 			m_cheeses[i - 1] = nullptr;
