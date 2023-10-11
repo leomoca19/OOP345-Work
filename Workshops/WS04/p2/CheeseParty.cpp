@@ -62,7 +62,13 @@ namespace sdds {
 		return *this;
 	}
 	CheeseParty& CheeseParty::removeCheese() {
+		for (size_t i = 0; i < m_size; i++)
+			if (m_cheeses)
 		return *this;
+	}
+
+	const Cheese* CheeseParty::operator[](size_t i) const{
+		return (i <= m_size ? m_cheeses[i] : static_cast<const Cheese*>(nullptr));
 	}
 
 	ostream& CheeseParty::print(ostream& os) const {
