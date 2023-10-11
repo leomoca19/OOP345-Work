@@ -18,7 +18,7 @@ namespace sdds {
 		size_t m_size{};
 
 	public:
-		CheeseParty(const std::string& name = "No name");
+		CheeseParty(const std::string& name = "Cheese Party");
 		CheeseParty(const CheeseParty& other);
 		CheeseParty(CheeseParty&& other);
 		CheeseParty& operator=(const CheeseParty& other);
