@@ -57,7 +57,7 @@ namespace sdds {
 
 	CheeseShop& CheeseShop::addCheese(const Cheese& other)
 	{
-		const Cheese** cheesesCopy = new const Cheese*[m_size + 1];
+		const Cheese** cheesesCopy = new const Cheese * [m_size + 1];
 		for (size_t i = 0; i < m_size; i++)
 			cheesesCopy[i] = m_cheeses[i];
 
@@ -76,7 +76,7 @@ namespace sdds {
 		os << separator << m_name << '\n' << separator;
 
 		os << (m_size ? "" : "This shop is out of cheese!\n");
-		for (size_t i = 0; i < m_size; i++) 
+		for (size_t i = 0; i < m_size; i++)
 			m_cheeses[i]->print(os);
 
 		return os << separator;

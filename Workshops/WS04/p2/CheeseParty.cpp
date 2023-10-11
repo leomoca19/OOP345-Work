@@ -19,21 +19,30 @@ namespace sdds {
 		*this = move(other);
 	}
 	CheeseParty& CheeseParty::operator=(const CheeseParty& other){
-		if (this->m_cheeses != other.m_cheeses) {
-			~*this;
+		if (this != &other) {
 			m_name = other.m_name;
 			m_size = other.m_size;
-			m_cheeses = other.m_cheeses;
+
+			delete[] m_cheeses;
+			m_cheeses = nullptr;
+
+			m_cheeses = new const Cheese* [other.m_size];
+			for (size_t i = 0; i < m_size; i++)
+			{
+				m_cheeses[i] = other.m_cheeses[i];
+			}
 		}
 		return *this;
 	}
 	CheeseParty& CheeseParty::operator=(CheeseParty && other) {
 		if (this != &other) {
-			~*this;
-			*this = other;
-			
-			other.m_size = 0;
+			m_name = other.m_name;
+			m_size = other.m_size;
+
+			delete[] m_cheeses;
+			m_cheeses = other.m_cheeses;
 			other.m_cheeses = nullptr;
+			other.m_size = 0;
 		}
 		return *this;
 	}
@@ -70,9 +79,11 @@ namespace sdds {
 		return *this;
 	}
 	CheeseParty& CheeseParty::removeCheese() {
-		for (size_t i = 0; i < m_size; i++)
-			if (!m_cheeses[i]->getWeight())
+		bool found{};
+		for (size_t i = 0; i < m_size && !found; i++)
+			if (found = !m_cheeses[i]->getWeight())
 				m_cheeses[i] = nullptr;
+
 		return *this;
 	}
 
@@ -87,7 +98,8 @@ namespace sdds {
 			(m_size ? "" : "This party is just getting started!\n");
 
 		for (size_t i = 0; i < m_size; i++)
-			m_cheeses[i]->print(os);
+			if (m_cheeses[i]) 
+				m_cheeses[i]->print(os);
 
 		return os << separator;
 	}
