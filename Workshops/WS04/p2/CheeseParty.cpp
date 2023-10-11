@@ -66,6 +66,14 @@ namespace sdds {
 	}
 
 	ostream& CheeseParty::print(ostream& os) const {
+		const char separator[] = "--------------------------\n";
+
+		os << separator << m_name << '\n' << separator <<
+			(m_size ? "" : "This party is just getting started!\n");
+
+		for (size_t i = 0; i < m_size; i++)
+			m_cheeses[i]->print(os);
+
 		return os;
 	}
 
