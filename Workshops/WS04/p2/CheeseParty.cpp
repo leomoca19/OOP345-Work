@@ -10,6 +10,7 @@ that my professor provided to complete my workshops and assignments.
 #include "CheeseParty.h"
 using namespace std;
 namespace sdds {
+	CheeseParty::CheeseParty(){}
 	CheeseParty::CheeseParty(const std::string& name) : m_name(name){}
 	CheeseParty::CheeseParty(const CheeseParty& other) {
 		*this = other;
