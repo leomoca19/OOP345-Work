@@ -29,7 +29,7 @@ namespace sdds {
 		CheeseParty& addCheese(const Cheese& newCheese);
 		CheeseParty& removeCheese();
 
-		std::ostream& print(std::ostream& os);
+		std::ostream& print(std::ostream& os) const;
 	};
 	std::ostream& operator<<(std::ostream& os, const CheeseParty& other);
 }
