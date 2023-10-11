@@ -48,18 +48,26 @@ namespace sdds {
 		m_size = 0;
 	}
 
-	CheeseParty& CheeseParty::addCheese(const Cheese& other)
+	CheeseParty& CheeseParty::addCheese(const Cheese& newCheese)
 	{
-		const Cheese** cheesesCopy = new const Cheese * [m_size + 1];
-		for (size_t i = 0; i < m_size; i++)
-			cheesesCopy[i] = m_cheeses[i];
+		// a. Check if the party is empty and allocate memory if needed.
+		if (m_size == 0)
+			m_cheeses = new const Cheese * [1];
 
-		cheesesCopy[m_size++] = new Cheese(other);
+		// b. Check if the newCheese is already in the party.
+		auto it = std::find_if(m_cheeses, m_cheeses + m_size, [&newCheese](const Cheese* cheese) {
+			return cheese != nullptr && &newCheese == cheese;
+			});
 
-		delete[] m_cheeses;
-		m_cheeses = cheesesCopy;
+		// c. If it's already in the party, do nothing.
 
-		return *this;
+		// d. If it's not in the party, resize the array and copy elements.
+
+		// e. Store the address of newCheese in the array.
+
+		// f. Update the size.
+
+		// g. Return a reference to the current CheeseParty instance.
 	}
 	CheeseParty& CheeseParty::removeCheese() {
 		for (size_t i = 0; i < m_size; i++)
