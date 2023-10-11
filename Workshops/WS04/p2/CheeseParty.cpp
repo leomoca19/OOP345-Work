@@ -63,7 +63,8 @@ namespace sdds {
 	}
 	CheeseParty& CheeseParty::removeCheese() {
 		for (size_t i = 0; i < m_size; i++)
-			if (m_cheeses)
+			if (!m_cheeses[i]->getWeight())
+				m_cheeses[i] = nullptr;
 		return *this;
 	}
 
