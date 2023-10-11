@@ -81,7 +81,7 @@ namespace sdds {
 		for (size_t i = 0; i < m_size; i++)
 			m_cheeses[i]->print(os);
 
-		return os;
+		return os << separator;
 	}
 
 	ostream& operator<<(ostream& os, const CheeseParty& other) {
