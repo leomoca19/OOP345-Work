@@ -14,11 +14,11 @@ that my professor provided to complete my workshops and assignments.
 namespace sdds {
 	class CheeseParty {
 		const Cheese** m_cheeses{};
-		std::string m_name;
+		std::string m_name{ "Cheese Party" };
 		size_t m_size{};
 
 	public:
-		CheeseParty(const std::string& name = "Cheese Party");
+		CheeseParty(const std::string& name);
 		CheeseParty(const CheeseParty& other);
 		CheeseParty(CheeseParty&& other);
 		CheeseParty& operator=(const CheeseParty& other);
