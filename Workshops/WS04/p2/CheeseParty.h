@@ -9,6 +9,7 @@ that my professor provided to complete my workshops and assignments.
 ***********************************************************************/
 #ifndef SDDS_CHEESEPARTY_H
 #define SDDS_CHEESEPARTY_H
+#include <iostream>
 #include "Cheese.h"
 namespace sdds {
 	class CheeseParty {
@@ -17,10 +18,10 @@ namespace sdds {
 		size_t m_size{};
 
 	public:
-		CheeseParty(std::string name = "");
+		CheeseParty(const std::string name = "No name");
 		CheeseParty(const CheeseParty& other);
-		CheeseParty& operator=(const CheeseParty& other);
 		CheeseParty(CheeseParty&& other);
+		CheeseParty& operator=(const CheeseParty& other);
 		CheeseParty& operator=(CheeseParty&& other);
 		~CheeseParty();
 		void operator~();
