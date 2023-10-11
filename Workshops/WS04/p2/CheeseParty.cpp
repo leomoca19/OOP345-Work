@@ -19,12 +19,11 @@ namespace sdds {
 		*this = move(other);
 	}
 	CheeseParty& CheeseParty::operator=(const CheeseParty& other){
-		if (this != &other) {
+		if (this->m_cheeses != other.m_cheeses) {
 			~*this;
 			m_name = other.m_name;
-
-			for (size_t i = 0; i < other.m_size; i++)
-				addCheese(*other.m_cheeses[i]);
+			m_size = other.m_size;
+			m_cheeses = other.m_cheeses;
 		}
 		return *this;
 	}
@@ -32,7 +31,9 @@ namespace sdds {
 		if (this != &other) {
 			~*this;
 			*this = other;
-			~other;
+			
+			other.m_size = 0;
+			other.m_cheeses = nullptr;
 		}
 		return *this;
 	}
