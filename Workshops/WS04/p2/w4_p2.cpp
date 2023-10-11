@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
     printdivider(70);
   }
 
-  // CheeseParty testing
+   //CheeseParty testing
   {
     printdivider(70, "Cheese Party (empty)");
     sdds::CheeseParty cp;
