@@ -22,6 +22,7 @@ namespace sdds {
 	CheeseShop& CheeseShop::operator=(CheeseShop&& other)
 	{
 		if (this != &other) {
+			~*this;
 			*this = other;
 			~other;
 		}
