@@ -1,0 +1,16 @@
+/***********************************************************************
+Author: Leonardo de la Mora Caceres
+Student number: 152877205
+Email: lde-la-mora-canceres@myseneca.ca
+Date of completion: October-11-2023
+***********************************************************************/
+Designing Composition and Aggregation Class Relationships:
+I've learned how to distinguish between composition and aggregation in class relationships. In this project, I observed that both the CheeseShop and CheeseParty classes utilize an attribute of type const Cheese**. However, they represent distinct relationships with the Cheese class. CheeseShop is an example of composition, where it directly owns and manages cheese objects. In contrast, CheeseParty demonstrates aggregation, signifying that it maintains references to cheese objects without direct ownership. This experience has solidified my understanding of the responsibilities and implications associated with these relationships.
+
+Using String Member Functions for Tokenization:
+I've acquired the ability to utilize member functions of the string class for parsing strings into tokens based on specific rules. In the Cheese.cpp file, I implemented string parsing to extract information about cheese objects from a given string with a specific format. By using string functions such as find_first_of and substr, I successfully separated and stored the name, weight, price, and features of the cheese. This knowledge will be valuable for handling and processing data in real-world programming scenarios.
+
+Managing Dynamically Allocated Arrays of Pointers:
+The project involved designing and coding classes that manage dynamically allocated arrays of pointers to objects, referred to as double pointers. Both CheeseShop and CheeseParty classes utilize arrays of const Cheese** to store references to cheese objects. Understanding the memory management aspects of dynamic arrays and pointers is crucial in ensuring proper resource allocation and deallocation, which I've demonstrated by implementing the constructors, destructors, and assignment operators for these classes.
+
+In summary, this workshop has provided a solid foundation in object-oriented programming, including class relationships, string manipulation, and dynamic memory management, which will be valuable in future software development projects.
