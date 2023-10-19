@@ -12,12 +12,14 @@ that my professor provided to complete my workshops and assignments.
 #include <iostream>
 namespace sdds {
 	class Book {
-		std::string author{},
+		std::string 
+			author{},
 			title{},
 			pubCountry{},
 			description{};
 
-		size_t pubYear{},
+		size_t 
+			pubYear{},
 			price{};
 	};
 }
