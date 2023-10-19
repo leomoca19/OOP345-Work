@@ -21,6 +21,16 @@ namespace sdds {
 		size_t 
 			pubYear{},
 			price{};
+
+	public:
+		Book();
+		explicit Book(const std::string& = "");
+
+		const std::string& title() const;
+		const std::string& country() const;
+		const size_t& year() const;
+		double& price();
 	};
+	std::ostream& operator<<(std::ostream&, const Book&);
 }
 #endif // !SDDS_BOOK_H
