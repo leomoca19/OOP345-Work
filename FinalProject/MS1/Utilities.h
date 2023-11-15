@@ -11,7 +11,7 @@
 namespace sdds {
 	class Utilities {
 		static char m_delimiter;
-		size_t m_widthField;
+		size_t m_widthField = 1;
 
 	public:
 		/// <summary>
