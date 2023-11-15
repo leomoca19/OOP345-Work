@@ -9,8 +9,8 @@
 #define UTILITIES_H
 namespace sdds {
 	class Utilities {
-		size_t m_widthField;
 		static char m_delimiter;
+		size_t m_widthField;
 
 	public:
 		/// <summary>
