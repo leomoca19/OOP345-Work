@@ -40,7 +40,9 @@ namespace sdds {
 		return str_;
 	}
 
-	void Utilities::setDelimiter(char newDelimiter){}
+	void Utilities::setDelimiter(char newDelimiter){
+		m_delimiter = newDelimiter;
+	}
 
 	char Utilities::getDelimiter() {
 		return m_delimiter;
