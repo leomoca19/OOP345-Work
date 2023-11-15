@@ -19,27 +19,12 @@ namespace sdds {
 	}
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more){
-		string str_{};
-		size_t i{ next_pos };
-		bool success{};
+        size_t delimiter_pos = str.find(m_delimiter, next_pos);
+        std::string token;
 
-		//uses the delimiter to extract the next token from `str` starting at position `next_pos`
-		while (str[i] != m_delimiter) {
+		//To be completed
 
-		}
-
-
-		if (success) {
-			///	-If successful, return a copy of the extracted token found(without spaces at the 
-			///	beginning / end),    update `next_pos` with the position of the next token, and set 
-			///	`more` to `true` (`false` otherwise)
-		}
-		///		-reports an exception if a delimiter is found at `next_pos`
-		///		-updates the current object's `m_widthField` data member if its current value is less 
-		///		than the size	of the token extracted
-
-
-		return str_;
+		return token;
 	}
 
 	void Utilities::setDelimiter(char newDelimiter){
