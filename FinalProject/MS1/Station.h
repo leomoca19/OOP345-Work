@@ -14,8 +14,9 @@ namespace sdds {
 			m_widthField,
 			id_generator;
 
+		int m_id;
+
 		size_t
-			m_station, //migth have to int
 			m_sku,
 			m_stock;
 
