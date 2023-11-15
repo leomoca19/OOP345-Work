@@ -8,8 +8,8 @@
 #include "Utilities.h"
 using namespace std;
 namespace sdds {
-	void Utilities::setFieldWidth(size_t newWidth) {
-
+	void Utilities::setFieldWidth(size_t newWidth){
+		m_widthField = newWidth;
 	}
 
 	size_t Utilities::getFieldWidth() const{}
