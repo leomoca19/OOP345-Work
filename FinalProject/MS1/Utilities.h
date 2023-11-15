@@ -7,6 +7,7 @@
 // and the content was created entirely by me.
 #ifndef UTILITIES_H
 #define UTILITIES_H
+#include <string>
 namespace sdds {
 	class Utilities {
 		static char m_delimiter;
