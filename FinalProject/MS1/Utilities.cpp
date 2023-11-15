@@ -12,7 +12,9 @@ namespace sdds {
 		m_widthField = newWidth;
 	}
 
-	size_t Utilities::getFieldWidth() const{}
+	size_t Utilities::getFieldWidth() const{
+		return m_widthField;
+	}
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more){}
 
