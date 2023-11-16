@@ -27,7 +27,7 @@ namespace sdds {
 		try{
 			m_description = util.extractToken(record, next_pos, more);
 		}
-		catch (...) { 
+		catch (string& err) { 
 			m_description = trim(record.substr(next_pos));
 		}
 	}

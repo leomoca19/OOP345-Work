@@ -6,7 +6,9 @@
 // I confirm that I am the only author of this file
 // and the content was created entirely by me.
 #include <algorithm>
+#include <string>
 #include "Utilities.h"
+#include <iostream>;
 using namespace std;
 namespace sdds {
 	char Utilities::m_delimiter = '\0';
@@ -20,21 +22,45 @@ namespace sdds {
 	}
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
-        size_t delimiter_pos = str.find(m_delimiter, next_pos);
-        string token{};
+		string token{};
+		size_t i{ next_pos }, len = str.length();
+		bool found{};
 
-        if ((more = (delimiter_pos != string::npos &&
-            delimiter_pos != next_pos))) {
-            token = trim(str.substr(next_pos, delimiter_pos - next_pos));
+		for (;!found && (more = i < len); i++)
+		{
+			if (found = str[i] == m_delimiter)
+				break;
+		}
+		
+		try {
+			if (found && !more || i == next_pos)
+			{
+				more = 0;
+				throw false;
+			}
 
-            next_pos = delimiter_pos + 1;
+			else if (!found && !more)
+				throw true;
 
-            m_widthField = std::max(m_widthField, token.length());
-        }
-        else 
-            throw "delimiter is found at next_pos";
+			else
+				token = str.substr(next_pos, i - next_pos);
 
-        return token;
+			next_pos = i + 1;
+			trim(token);
+			m_widthField = std::max(m_widthField, token.length());
+		}
+		catch (bool& valid) {
+			if (valid)
+			{
+				token = str.substr(next_pos);
+				trim(token);
+				m_widthField = std::max(m_widthField, token.length());
+			}
+			else
+				throw "bad token";
+		}
+
+		return trim(token);
 	}
 
 	void Utilities::setDelimiter(char newDelimiter) {
@@ -45,21 +71,21 @@ namespace sdds {
 		return m_delimiter;
 	}
 
-    string& trim(string& str)
-    {
-        size_t trimStart;
-        size_t trimEnd;
+	string& trim(string& str)
+	{
+		size_t trimStart;
+		size_t trimEnd;
 
-        trimStart = str.find_first_not_of(' ');
-        trimEnd = str.find_last_not_of(' ');
+		trimStart = str.find_first_not_of(' ');
+		trimEnd = str.find_last_not_of(' ');
 
-        if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) {
-            str= str.substr(trimStart, trimEnd - trimStart + 1);
-        }
-        else if (trimStart != string::npos) {
-            str= str.substr(trimStart);
-        }
+		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) {
+			str = str.substr(trimStart, trimEnd - trimStart + 1);
+		}
+		else if (trimStart != string::npos) {
+			str = str.substr(trimStart);
+		}
 
-        return str;
-    }
+		return str;
+	}
 }
