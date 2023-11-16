@@ -14,7 +14,7 @@ namespace sdds {
 	size_t Station::m_widthField{},
 		Station::id_generator{};
 
-	Station::Station(const std::string& record) : m_id(id_generator++) {
+	Station::Station(const std::string& record) : m_id(++id_generator) {
 		Utilities util;
 		size_t npos{};
 		bool more{ 1 };
