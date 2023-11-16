@@ -55,5 +55,7 @@ namespace sdds {
 		/// </summary>
 		static char getDelimiter();
 	};
+
+	std::string& trim(std::string& str);
 }
 #endif // !UTILITIES_H
