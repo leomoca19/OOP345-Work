@@ -6,6 +6,7 @@
 // I confirm that I am the only author of this file
 // and the content was created entirely by me.
 #include <iostream>
+#include <algorithm>
 #include "Utilities.h"
 #include "Station.h"
 using namespace std;
@@ -22,8 +23,7 @@ namespace sdds {
 		m_serial = stoi(util.extractToken(record, npos, more));
 		m_quantity = stoi(util.extractToken(record, npos, more));
 
-		util.setFieldWidth(m_itemName.length());
-		m_widthField = util.getFieldWidth();
+		m_widthField = max(util.getFieldWidth(), m_widthField);
 
 		m_description = util.extractToken(record, npos, more);
 	}
