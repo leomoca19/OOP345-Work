@@ -49,12 +49,25 @@ namespace sdds {
 
 	void Station::display(std::ostream& os, bool full) const
 	{
-		os << m_id << " | " << m_itemName << " | " << m_serial << " | "
-			<< (full ? m_quantity + " | " + m_description : "") << endl;
+		os.setf(ios::left);
 
-		//`ID` field uses 3 characters, `NAME` field uses `m_widthField` characters,
-		//`QUANTITY` field uses 4 characters, `SERIAL` field uses 6 characters
+		os.width(3); os.fill('0');
+		os << m_id << " | ";
+		os.fill(' ');
 
-		//`DESCRIPTION` has no formatting options
+		os.width(m_widthField);
+		os << m_itemName << " | ";
+
+		os.width(6);
+		os << m_serial << " | ";
+
+		if (full)
+		{
+			os.width(4);
+			os << m_quantity << " | " << m_description;
+		}
+
+		os << endl;
+		os.unsetf(ios::left);
 	}
 }
