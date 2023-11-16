@@ -17,8 +17,8 @@ namespace sdds {
 		int m_id;
 
 		size_t
-			m_sku,
-			m_stock;
+			m_serial,
+			m_quantity;
 
 		std::string
 			m_itemName,
