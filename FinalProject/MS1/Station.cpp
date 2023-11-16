@@ -16,16 +16,20 @@ namespace sdds {
 
 	Station::Station(const std::string& record) : m_id(++id_generator) {
 		Utilities util;
-		size_t npos{};
+		size_t next_pos{};
 		bool more{ 1 };
 
-		m_itemName = util.extractToken(record, npos, more);
-		m_serial = stoi(util.extractToken(record, npos, more));
-		m_quantity = stoi(util.extractToken(record, npos, more));
+		m_itemName = util.extractToken(record, next_pos, more);
+		m_serial = stoi(util.extractToken(record, next_pos, more));
+		m_quantity = stoi(util.extractToken(record, next_pos, more));
 
 		m_widthField = max(util.getFieldWidth(), m_widthField);
-
-		m_description = util.extractToken(record, npos, more);
+		try{
+			m_description = util.extractToken(record, next_pos, more);
+		}
+		catch (...) { 
+			m_description = trim(record.substr(next_pos));
+		}
 	}
 
 	const string& Station::getItemName() const {
