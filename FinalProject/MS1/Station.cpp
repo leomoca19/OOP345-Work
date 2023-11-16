@@ -39,7 +39,7 @@ namespace sdds {
 
 	size_t Station::getQuantity() const
 	{
-		return size_t();
+		return m_quantity;
 	}
 
 	void Station::updateQuantity()
