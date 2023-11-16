@@ -23,22 +23,17 @@ namespace sdds {
         size_t delimiter_pos = str.find(m_delimiter, next_pos);
         string token{};
 
-        if (delimiter_pos != string::npos &&
-            delimiter_pos != next_pos) {
-            token = str.substr(next_pos, delimiter_pos - next_pos);
+        if (more = (delimiter_pos != string::npos &&
+            delimiter_pos != next_pos)) {
+            token = trim(str.substr(next_pos, delimiter_pos - next_pos));
 
             next_pos = delimiter_pos + 1;
 
-            trim(token);
-
             m_widthField = std::max(m_widthField, token.length());
-
-            more = true;
         }
-        else {
-            more = false;
+        else 
             throw "delimiter is found at next_pos";
-        }
+
         return token;
 	}
 
@@ -50,7 +45,7 @@ namespace sdds {
 		return m_delimiter;
 	}
 
-    void trim(string& str)
+    string& trim(string& str)
     {
         size_t trimStart;
         size_t trimEnd;
@@ -64,5 +59,7 @@ namespace sdds {
         else if (trimStart != string::npos) {
             str= str.substr(trimStart);
         }
+
+        return str;
     }
 }
