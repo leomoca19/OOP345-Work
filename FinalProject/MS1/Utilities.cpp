@@ -23,8 +23,8 @@ namespace sdds {
         size_t delimiter_pos = str.find(m_delimiter, next_pos);
         string token{};
 
-        if (more = (delimiter_pos != string::npos &&
-            delimiter_pos != next_pos)) {
+        if ((more = (delimiter_pos != string::npos &&
+            delimiter_pos != next_pos))) {
             token = trim(str.substr(next_pos, delimiter_pos - next_pos));
 
             next_pos = delimiter_pos + 1;
