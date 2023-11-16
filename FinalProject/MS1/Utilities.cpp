@@ -38,7 +38,10 @@ namespace sdds {
 
 		trimStart = token.find_first_not_of(' ');
 		trimEnd = token.find_last_not_of(' ');
-		token = token.substr(trimStart, trimStart - trimEnd);
+		token = 
+			(trimStart != trimEnd)
+			? token.substr(trimStart, trimStart - trimEnd)
+			: token.substr(trimStart);
 
 		m_widthField = max(m_widthField, token.length());
 
