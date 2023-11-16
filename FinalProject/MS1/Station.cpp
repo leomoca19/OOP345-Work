@@ -29,7 +29,7 @@ namespace sdds {
 	}
 
 	const string& Station::getItemName() const {
-		return string();
+		return m_itemName;
 	}
 
 	size_t Station::getNextSerialNumber()
