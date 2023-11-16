@@ -49,17 +49,19 @@ namespace sdds {
 
 	void Station::display(std::ostream& os, bool full) const
 	{
-		os.setf(ios::left);
 
 		os.width(3); os.fill('0');
 		os << m_id << " | ";
 		os.fill(' ');
 
+		os.setf(ios::left);
 		os.width(m_widthField);
 		os << m_itemName << " | ";
+		os.unsetf(ios::left);
 
-		os.width(6);
+		os.width(6); os.fill('0');
 		os << m_serial << " | ";
+		os.fill(' ');
 
 		if (full)
 		{
