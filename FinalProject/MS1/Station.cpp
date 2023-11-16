@@ -6,11 +6,23 @@
 // I confirm that I am the only author of this file
 // and the content was created entirely by me.
 #include <iostream>
+#include "Utilities.h"
 #include "Station.h"
 using namespace std;
-namespace sdds{
-	Station::Station(const std::string& record) {
+namespace sdds {
+	Station::Station(const std::string& record) : m_id(id_generator++) {
+		Utilities util;
+		size_t npos{};
+		bool more{ 1 };
 
+		m_itemName = util.extractToken(record, npos, more);
+		m_serial = stoi(util.extractToken(record, npos, more));
+		m_quantity = stoi(util.extractToken(record, npos, more));
+
+		util.setFieldWidth(m_itemName.length());
+		m_widthField = util.getFieldWidth();
+
+		m_description = util.extractToken(record, npos, more);
 	}
 
 	const string& Station::getItemName() const {
