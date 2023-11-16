@@ -70,7 +70,7 @@ int main(int argc, char** argv)
 	cout << "getQuantity(): " << theStations[0].getQuantity() << endl;
 	cout << endl;
 
-
+	
 	cout << "========================================" << endl;
 	cout << "=              Utilities               =" << endl;
 	cout << "========================================" << endl;

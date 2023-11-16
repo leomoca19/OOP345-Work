@@ -7,8 +7,8 @@
 // and the content was created entirely by me.
 #include <algorithm>
 #include <string>
+#include <iostream>
 #include "Utilities.h"
-#include <iostream>;
 using namespace std;
 namespace sdds {
 	char Utilities::m_delimiter = '\0';
@@ -28,12 +28,12 @@ namespace sdds {
 
 		for (;!found && (more = i < len); i++)
 		{
-			if (found = str[i] == m_delimiter)
+			if ((found = str[i] == m_delimiter))
 				break;
 		}
 		
 		try {
-			if (found && !more || i == next_pos)
+			if ((found && !more) || i == next_pos)
 			{
 				more = 0;
 				throw false;

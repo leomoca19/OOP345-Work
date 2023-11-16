@@ -28,7 +28,8 @@ namespace sdds {
 			m_description = util.extractToken(record, next_pos, more);
 		}
 		catch (string& err) { 
-			m_description = trim(record.substr(next_pos));
+			m_description = record.substr(next_pos);
+			trim(m_description);
 		}
 	}
 
@@ -48,7 +49,13 @@ namespace sdds {
 
 	void Station::updateQuantity()
 	{
-		m_quantity = m_quantity ? --m_quantity : 0;
+		if (m_quantity > 0) {
+			--m_quantity;
+		}
+		else {
+			m_quantity = 0;
+		}
+
 	}
 
 	void Station::display(std::ostream& os, bool full) const
