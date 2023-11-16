@@ -20,33 +20,26 @@ namespace sdds {
 	}
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
-		size_t delimiter_pos = str.find(m_delimiter, next_pos);
-		std::string token{};
-		size_t trimStart{},
-			trimEnd{};
+        size_t delimiter_pos = str.find(m_delimiter, next_pos);
+        string token{};
 
-		if (delimiter_pos != next_pos)
-		{
-			token = str.substr(next_pos, delimiter_pos - next_pos);
-			next_pos = delimiter_pos + 1;
-		}
-		else
-		{
-			throw "delimiter found at next_pos";
-			more = 0;
-		}
+        if (delimiter_pos != string::npos &&
+            delimiter_pos != next_pos) {
+            token = str.substr(next_pos, delimiter_pos - next_pos);
 
-		trimStart = token.find_first_not_of(' ');
-		trimEnd = token.find_last_not_of(' ');
+            next_pos = delimiter_pos + 1;
 
-		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) 
-			token = token.substr(trimStart, trimEnd - trimStart + 1);
-		else if (trimStart != string::npos)
-			token = token.substr(trimStart);
+            trim(token);
 
-		m_widthField = max(m_widthField, token.length());
+            m_widthField = std::max(m_widthField, token.length());
 
-		return token;
+            more = true;
+        }
+        else {
+            more = false;
+            throw "delimiter is found at next_pos";
+        }
+        return token;
 	}
 
 	void Utilities::setDelimiter(char newDelimiter) {
@@ -56,4 +49,20 @@ namespace sdds {
 	char Utilities::getDelimiter() {
 		return m_delimiter;
 	}
+
+    void trim(string& str)
+    {
+        size_t trimStart;
+        size_t trimEnd;
+
+        trimStart = str.find_first_not_of(' ');
+        trimEnd = str.find_last_not_of(' ');
+
+        if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) {
+            str= str.substr(trimStart, trimEnd - trimStart + 1);
+        }
+        else if (trimStart != string::npos) {
+            str= str.substr(trimStart);
+        }
+    }
 }
