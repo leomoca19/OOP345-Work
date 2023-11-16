@@ -26,24 +26,29 @@ namespace sdds {
 
 	public:
 		/// <summary>
-		/*This string	contains a single record(one line) that has been retrieved from the input file specified by the	user
-		
-		- this constructor uses a `Utilities` object (defined locally) to extract each token 
-		from the record and		populates the `Station` object accordingly
-		
-		- this constructor assumes that the string contains 4 fields separated by the delimiter, in the following   	order:
-		-name of the item
-		- starting serial number
-		- quantity in stock
-		- description
-		
-		- the token delimiter is a single character, specified by the client and previously stored into thec `Utilities` class of objects
-		
-		- this constructor extracts *name*, *starting serial number*, and *quantity* from the string first
-		
-		- before extracting *description*, it updates `Station::m_widthField` to the maximum value `Station::m_widthField` and `Utilities::m_widthField`
-		
-		- **Note:**  the `display(...)` member function uses this field width to align the output across all the	records retrieved from the file*/
+		/// This string	contains a single record (one line) that has been retrieved from the 
+		///	input file specified by the	user
+		/// 
+		///	- this constructor uses a `Utilities` object (defined locally) to extract each token 
+		/// from the record and		populates the `Station` object accordingly
+		/// 
+		///	- this constructor assumes that the string contains 4 fields separated by the 
+		/// delimiter, in the following   	order:
+		///		-name of the item
+		///		- starting serial number
+		///		- quantity in stock
+		///		- description
+		///
+		///	- the token delimiter is a single character, specified by the client and previously stored 
+		/// into thec `Utilities` class of objects
+		/// 
+		///	- this constructor extracts *name*, *starting serial number*, and *quantity* from the string first
+		/// 
+		///	- before extracting *description*, it updates `Station::m_widthField` to the maximum 
+		/// value `Station::m_widthField` and `Utilities::m_widthField`
+		/// 
+		///	- **Note:**  the `display(...)` member function uses this field width to align the output across all
+		/// the	records retrieved from the file
 		/// </summary>
 		Station(const std::string& record);
 
