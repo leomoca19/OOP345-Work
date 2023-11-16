@@ -44,6 +44,7 @@ namespace sdds {
 
 	void Station::updateQuantity()
 	{
+		m_quantity = m_quantity ? --m_quantity : 0;
 	}
 
 	void Station::display(std::ostream& os, bool full) const
