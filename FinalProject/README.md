@@ -181,52 +181,6 @@ and follow the instructions.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Milestone #2
 
 Milestone 2 implements and tests the `CustomerOrder` module.
@@ -331,45 +285,6 @@ From a command prompt, execute the following command:
 and follow the instructions.
 
 **A successful submission does not guarantee full credit!**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
