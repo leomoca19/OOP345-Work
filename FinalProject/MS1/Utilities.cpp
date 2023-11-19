@@ -23,15 +23,14 @@ namespace sdds {
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
 		string token{};
-		size_t i{ next_pos }, len = str.length();
+		size_t i{ next_pos };
 		bool found{};
 
-		for (;!found && (more = i < len); i++)
-		{
+		for (;!found && (more = i < str.length()); i++)
 			if ((found = str[i] == m_delimiter))
 				break;
-		}
-		
+
+		//more = !found;
 		try {
 			if ((found && !more) || i == next_pos)
 			{
@@ -41,26 +40,19 @@ namespace sdds {
 
 			else if (!found && !more)
 				throw true;
-
-			else
-				token = str.substr(next_pos, i - next_pos);
-
-			next_pos = i + 1;
-			trim(token);
-			m_widthField = std::max(m_widthField, token.length());
 		}
 		catch (bool& valid) {
-			if (valid)
-			{
-				token = str.substr(next_pos);
-				trim(token);
-				m_widthField = std::max(m_widthField, token.length());
-			}
-			else
+			if (!valid)
 				throw "bad token";
 		}
 
-		return trim(token);
+		token = str.substr(next_pos, i - next_pos);
+		next_pos = i + 1;
+
+		trim(token);
+		m_widthField = std::max(m_widthField, token.length());
+
+		return token;
 	}
 
 	void Utilities::setDelimiter(char newDelimiter) {

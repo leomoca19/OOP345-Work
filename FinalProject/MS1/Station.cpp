@@ -24,13 +24,7 @@ namespace sdds {
 		m_quantity = stoi(util.extractToken(record, next_pos, more));
 
 		m_widthField = max(util.getFieldWidth(), m_widthField);
-		try{
-			m_description = util.extractToken(record, next_pos, more);
-		}
-		catch (string& err) { 
-			m_description = record.substr(next_pos);
-			trim(m_description);
-		}
+		m_description = util.extractToken(record, next_pos, more);
 	}
 
 	const string& Station::getItemName() const {
