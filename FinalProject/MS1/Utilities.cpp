@@ -30,8 +30,7 @@ namespace sdds {
 			if ((found = str[i] == m_delimiter))
 				break;
 
-		//more = !found;
-		try {
+		try { // can be more consice, but my brain is fried
 			if ((found && !more) || i == next_pos)
 			{
 				more = 0;
