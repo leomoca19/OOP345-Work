@@ -36,7 +36,12 @@ namespace sdds {
 	}
 	CustomerOrder::~CustomerOrder()
 	{
+		for (size_t i = 0; i < m_cntItem; ++i) 
+			delete m_lstItem[i];
+
+		delete[] m_lstItem;
 	}
+
 	bool CustomerOrder::isOrderFilled() const
 	{
 		return false;
