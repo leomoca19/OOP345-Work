@@ -46,6 +46,22 @@ namespace sdds {
 	}
 	CustomerOrder& CustomerOrder::operator=(CustomerOrder&& other) noexcept
 	{
+		if (this != &other) {
+			clearLstItem();
+
+			m_name = std::move(other.m_name);
+			m_product = std::move(other.m_product);
+			m_cntItem = std::move(other.m_cntItem);
+			m_lstItem = std::move(other.m_lstItem);
+			m_widthField = std::move(other.m_widthField);
+
+			other.m_name.clear();
+			other.m_product.clear();
+			other.m_cntItem = 0;
+			other.m_lstItem = nullptr;
+			other.m_widthField = 0;
+		}
+
 		return *this;
 	}
 	CustomerOrder::~CustomerOrder()
