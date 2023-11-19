@@ -43,13 +43,7 @@ namespace sdds {
 
 	void Station::updateQuantity()
 	{
-		if (m_quantity > 0) {
-			--m_quantity;
-		}
-		else {
-			m_quantity = 0;
-		}
-
+		m_quantity = m_quantity > 0 ? m_quantity - 1 : 0;
 	}
 
 	void Station::display(std::ostream& os, bool full) const
