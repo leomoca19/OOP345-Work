@@ -35,6 +35,7 @@ namespace sdds {
 	}
 	CustomerOrder::CustomerOrder(CustomerOrder&& other) noexcept
 	{
+		*this = move(other);
 	}
 	CustomerOrder& CustomerOrder::operator=(CustomerOrder&& other) noexcept
 	{
