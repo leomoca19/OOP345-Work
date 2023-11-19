@@ -54,13 +54,11 @@ namespace sdds {
 			m_product = std::move(other.m_product);
 			m_cntItem = std::move(other.m_cntItem);
 			m_lstItem = std::move(other.m_lstItem);
-			m_widthField = std::move(other.m_widthField);
 
 			other.m_name.clear();
 			other.m_product.clear();
 			other.m_cntItem = 0;
 			other.m_lstItem = nullptr;
-			other.m_widthField = 0;
 		}
 
 		return *this;
@@ -127,8 +125,11 @@ namespace sdds {
 		os << m_name << " - " << m_product << '\n';
 		for (size_t i = 0; i < m_cntItem; ++i)
 		{
-			os << setw(6) << setfill('0') << "[" << m_lstItem[i]->m_serialNumber << "] "
-				<< setw(m_widthField) << setfill(' ') << m_lstItem[i]->m_itemName << " - "
+			os << "[" << setw(6) << setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
+
+			os << setw(m_widthField) << setfill(' ') << m_lstItem[i]->m_itemName;
+
+			os << " - "
 				<< (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << endl;
 		}
 	}
