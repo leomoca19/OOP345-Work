@@ -35,7 +35,7 @@ namespace sdds {
 		CustomerOrder& operator=(CustomerOrder&& other) noexcept;
 		~CustomerOrder();
 
-		CustomerOrder(CustomerOrder& other) = delete; // maybe remove delete and make it throw
+		CustomerOrder(CustomerOrder& other); // maybe remove delete and make it throw
 		CustomerOrder& operator=(CustomerOrder& other) = delete;
 
 		bool isOrderFilled() const;

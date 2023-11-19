@@ -5,6 +5,7 @@
 //
 // I confirm that I am the only author of this file
 // and the content was created entirely by me.
+#include <iomanip>
 #include "Utilities.h"
 #include "CustomerOrder.h"
 using namespace std;
@@ -69,6 +70,11 @@ namespace sdds {
 		clearLstItem();
 	}
 
+	CustomerOrder::CustomerOrder(CustomerOrder& other)
+	{
+		throw "Copy construction of CustomerOder not allowed";
+	}
+
 	bool CustomerOrder::isOrderFilled() const
 	{
 		bool allFilled{ true};
@@ -118,5 +124,12 @@ namespace sdds {
 	}
 	void CustomerOrder::display(std::ostream& os) const
 	{
+		os << m_name << " - " << m_product << '\n';
+		for (size_t i = 0; i < m_cntItem; ++i)
+		{
+			os << setw(6) << setfill('0') << "[" << m_lstItem[i]->m_serialNumber << "] "
+				<< setw(m_widthField) << setfill(' ') << m_lstItem[i]->m_itemName << " - "
+				<< (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << endl;
+		}
 	}
 }
