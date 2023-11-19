@@ -80,7 +80,13 @@ namespace sdds {
 	}
 	bool CustomerOrder::isItemFilled(const std::string& itemName) const
 	{
-		return false;
+		bool allFilled{ true };
+
+		for (size_t i = 0; i < m_cntItem && allFilled; i++)
+			if (itemName == m_lstItem[i]->m_itemName)
+				allFilled = m_lstItem[i]->m_isFilled;
+
+		return allFilled;
 	}
 	void CustomerOrder::fillItem(Station& station, std::ostream& os)
 	{
