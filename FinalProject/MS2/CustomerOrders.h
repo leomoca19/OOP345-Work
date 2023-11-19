@@ -22,13 +22,13 @@ namespace sdds {
 	class CustomerOrder {
 		static size_t m_widthField;
 
-		std::string m_name;
-		std::string m_product;
-		size_t m_cntItem;
-		Item** m_lstItem;
+		std::string m_name{};
+		std::string m_product{};
+		size_t m_cntItem{};
+		Item** m_lstItem{};
 
 	public:
-		CustomerOrder();
+		CustomerOrder() {}
 		CustomerOrder(const std::string& record);
 		CustomerOrder(CustomerOrder&& other) noexcept;
 		CustomerOrder& operator=(CustomerOrder&& other) noexcept;
