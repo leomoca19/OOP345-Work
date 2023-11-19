@@ -27,6 +27,7 @@ namespace sdds {
 		size_t m_cntItem{};
 		Item** m_lstItem{};
 
+		void clearLstItem();
 	public:
 		CustomerOrder() {}
 		CustomerOrder(const std::string& record);
