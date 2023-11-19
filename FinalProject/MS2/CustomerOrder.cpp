@@ -117,6 +117,7 @@ namespace sdds {
 				{
 					os << "    " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "] already filled" << std::endl;
 				}
+				break;
 			}
 		}
 	}
@@ -125,11 +126,7 @@ namespace sdds {
 		os << m_name << " - " << m_product << '\n';
 		for (size_t i = 0; i < m_cntItem; ++i)
 		{
-			os << "[" << setw(6) << setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
-
-			os << setw(m_widthField) << setfill(' ') << m_lstItem[i]->m_itemName;
-
-			os << " - "
+			os << "[" << setw(6) << setfill('0') << m_lstItem[i]->m_serialNumber << "] " << setw(m_widthField) << setfill(' ') << left << m_lstItem[i]->m_itemName << " - "
 				<< (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << endl;
 		}
 	}
