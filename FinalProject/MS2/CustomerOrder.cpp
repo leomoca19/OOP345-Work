@@ -10,20 +10,26 @@
 using namespace std;
 namespace sdds {
 	size_t CustomerOrder::m_widthField{};
-	CustomerOrder::CustomerOrder(const std::string& record) : m_cntItem{}
+	CustomerOrder::CustomerOrder(const std::string& record)
 	{
 		Utilities util{};
 		size_t next_pos{};
-		bool more{ 1 };
+		bool more{ true };
 
 		m_name = util.extractToken(record, next_pos, more);
 		m_product = util.extractToken(record, next_pos, more);
 
-		m_lstItem = new Item * [m_cntItem];
-
 		while (more) {
 			string itemname = util.extractToken(record, next_pos, more);
-			m_lstItem[m_cntItem++] = new Item(itemname);
+			auto temp = new Item* [m_cntItem + 1];
+
+			for (size_t i{}; i < m_cntItem; ++i)
+				temp[i] = m_lstItem[i];
+			temp[m_cntItem++] = new Item(itemname);
+
+			delete[] m_lstItem;
+			m_lstItem = temp;
+
 			m_widthField = max(util.getFieldWidth(), m_widthField);
 		}
 	}
