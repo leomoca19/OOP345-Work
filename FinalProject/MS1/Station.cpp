@@ -7,6 +7,7 @@
 // and the content was created entirely by me.
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 #include "Utilities.h"
 #include "Station.h"
 using namespace std;
@@ -48,27 +49,14 @@ namespace sdds {
 
 	void Station::display(std::ostream& os, bool full) const
 	{
+		os << setw(3) << setfill('0') << right << m_id << " | "
+			<< setw(m_widthField) << setfill(' ') << left << m_itemName << " | "
+			<< setw(6) << setfill('0') << right << m_serial << " | "
+			<< setfill(' ');
 
-		os.width(3); os.fill('0');
-		os << m_id << " | ";
-		os.fill(' ');
-
-		os.setf(ios::left);
-		os.width(m_widthField);
-		os << m_itemName << " | ";
-		os.unsetf(ios::left);
-
-		os.width(6); os.fill('0');
-		os << m_serial << " | ";
-		os.fill(' ');
-
-		if (full)
-		{
-			os.width(4);
-			os << m_quantity << " | " << m_description;
-		}
-
+		if (full) 
+			os << setw(4) << m_quantity << " | " << m_description;
+		
 		os << endl;
-		os.unsetf(ios::left);
 	}
 }
