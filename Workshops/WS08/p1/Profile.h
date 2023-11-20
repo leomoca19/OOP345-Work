@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include <cctype>
 
 namespace sdds {
 
@@ -88,9 +89,20 @@ namespace sdds {
 		}
 
 		// TODO: add a function here to validate the address
+		void validateAddress() {
+			bool ana_nan{true};
 
+			for (size_t i = 0; i < 7 && ana_nan; i++)
+			{
+				if (i == 0 || i == 2 || i == 5) 
+					ana_nan = isalpha(m_address.postal_code[i]);
+				else if (i == 1 || i == 4 || i == 6) 
+					ana_nan = isdigit(m_address.postal_code[i]);
+			}
 
-
+			if (m_address.number < 0 || !ana_nan)
+				throw std::string("Invalid address: ") + std::to_string(m_id);
+		}
 
 		friend std::ostream& operator<<(std::ostream& os, const Profile& p) {
 			os << std::setw( 5) << p.m_id
