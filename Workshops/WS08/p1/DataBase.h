@@ -12,8 +12,8 @@
 #include <fstream>
 
 namespace sdds {
-    template <typename T>
-    class DataBase {
+	template <typename T>
+	class DataBase {
 		std::vector<T> database;
 	public:
 		DataBase() { }
@@ -37,18 +37,21 @@ namespace sdds {
 
 		// TODO: Overload the += operator with a raw pointer
 		//       as a second operand.
-
+		Database<T>& operator+=(const T* t) {
+			database.push_back(*t);
+			return *this;
+		}
 
 
 		void display(std::ostream& os) const {
 			os << std::fixed << std::setprecision(2);
 			for (auto& e : database)
 				os << e;
-        }
+		}
 	};
 
-    template<typename T>
-    std::ostream& operator<<(std::ostream& os, const DataBase<T>& db) {
+	template<typename T>
+	std::ostream& operator<<(std::ostream& os, const DataBase<T>& db) {
 		db.display(os);
 		return os;
 	}
