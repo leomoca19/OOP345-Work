@@ -95,7 +95,7 @@ namespace sdds
 
 		ofstream target(target_file, ios::binary);
 
-		if (success = (target.is_open())) {
+		if ((success = (target.is_open()))) {
 			target.write(reinterpret_cast<char*>(&total_items), sizeof(int));
 			target.write(reinterpret_cast<char*>(data), total_items * sizeof(int));
 		}
