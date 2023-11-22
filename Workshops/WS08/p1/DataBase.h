@@ -37,9 +37,8 @@ namespace sdds {
 
 		// TODO: Overload the += operator with a raw pointer
 		//       as a second operand.
-		Database<T>& operator+=(const T* t) {
+		void operator+=(const T* t) {
 			database.push_back(*t);
-			return *this;
 		}
 
 
