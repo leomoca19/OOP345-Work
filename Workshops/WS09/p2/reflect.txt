@@ -1,0 +1,10 @@
+In this workshop, I used multiple threads and processing raw binary data for the first time. Partitioning data across multiple threads seems essential for optimizing performance for modern computer which has multiple cores and thus multiple threads.
+
+By manipulating data in binary, I could read the data without having to tokenize it or even think  much about fields or delimiter since they weren't any, this made the reading process much simplier and easier than the files that we have been working with int the previous workshops. The use of binary files proved advantageous in terms of reduced storage requirements and faster read/write operations.
+
+The importance of binding functions to their arguments became evident when creating threads. Using bind, I associated specific arguments with functions, facilitating their use in multi-threaded operations. This enhanced code readability and maintenance.
+
+Using threads was excitingly fast when computing average and variance concurrently, taking advantage of the processing power of modern systems. By dividing the dataset into partitions and utilizing threads, my implementation achieved parallelism, optimizing resource utilization and enhancing overall performance.
+
+The biggest challenge was thinking on how to divide processes into threads and then keeping in mind to synching them back was not natural for me since I am not used to it.
+
