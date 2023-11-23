@@ -2,6 +2,10 @@
 // process_data.cpp
 // 2021/1/5 - Jeevan Pant
 // 2023/11/17 - Cornel
+// 2023/11/22 - Leonardo de la Mora Caceres 
+//	email:	lde-la-mora-canceres@myseneca.ca
+//	id:		152877205
+//	I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 
 #include <string>
 #include <iostream>
@@ -10,7 +14,7 @@
 #include <vector>
 #include <thread>
 #include "process_data.h"
-
+using namespace std;
 namespace sdds
 {
 	// The following function receives array (pointer) as the first argument, number of array 
@@ -47,21 +51,28 @@ namespace sdds
 	//   to hold the data items, and reads the data items into the allocated memory space. 
 	//   It prints first five data items and the last three data items as data samples. 
 	//   
-	ProcessData::ProcessData(const std::string& filename, int n_threads) {  
+	ProcessData::ProcessData(const string& filename, int n_threads) {  
 		// TODO: Open the file whose name was received as parameter and read the content
 		//         into variables "total_items" and "data". Don't forget to allocate
 		//         memory for "data".
 		//       The file is binary and has the format described in the specs.
 
+		ifstream file(filename, ios::binary);
+
+		if (!file)
+			throw runtime_error("Error: Unable to open the file '" + filename + "'");
+
+		file.read(reinterpret_cast<char*>(&total_items), sizeof(int));
+
+		data = new int[total_items];
+
+		file.read(reinterpret_cast<char*>(data), total_items * sizeof(int));
 
 
-
-
-
-		std::cout << "Item's count in file '"<< filename << "': " << total_items << std::endl;
-		std::cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
+		cout << "Item's count in file '"<< filename << "': " << total_items << endl;
+		cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
 		          << data[total_items - 3] << ", " << data[total_items - 2] << ", "
-		          << data[total_items - 1] << "]" << std::endl;
+		          << data[total_items - 1] << "]" << endl;
 
 		// Following statements initialize the variables added for multi-threaded 
 		//   computation
@@ -96,14 +107,21 @@ namespace sdds
 	//   part of the data. Add computed variance-factors to obtain total variance.
 	// Save the data into a file with filename held by the argument fname_target. 
 	// Also, read the workshop instruction.
+	int ProcessData::operator()(const string& target_file, double& avg, double& var) {
+		int success{};
 
+		computeAvgFactor(data, total_items, total_items, avg);
+		computeVarFactor(data, total_items, total_items, avg, var);
 
+		ofstream target(target_file, ios::binary);
 
+		if ((success = (target.is_open()))) {
+			target.write(reinterpret_cast<char*>(&total_items), sizeof(int));
+			target.write(reinterpret_cast<char*>(data), total_items * sizeof(int));
+		}
+		else
+			throw runtime_error("Error: Unable to open the file '" + target_file + "'");
 
-
-
-
-
-
-
+		return success; 
+	}
 }
