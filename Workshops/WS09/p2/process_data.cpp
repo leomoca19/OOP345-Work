@@ -1,4 +1,3 @@
-
 // Workshop 9 - Multi-Threading, Thread Class
 // process_data.cpp
 // 2021/1/5 - Jeevan Pant
@@ -111,8 +110,30 @@ namespace sdds
 	int ProcessData::operator()(const string& target_file, double& avg, double& var) {
 		int success{};
 
-		computeAvgFactor(data, total_items, total_items, avg);
-		computeVarFactor(data, total_items, total_items, avg, var);
+		// averages
+		vector<thread> avgThreads;
+		for (int i = 0; i < num_threads; ++i)
+			avgThreads.emplace_back(bind(&computeAvgFactor, data + p_indices[i], p_indices[i + 1] - p_indices[i], total_items, ref(averages[i])));
+
+		for (auto& thread : avgThreads)
+			thread.join();
+
+		for (int i = 0; i < num_threads; ++i)
+			avg += averages[i];
+
+
+		// variance 
+		vector<thread> varThreads;
+		for (int i = 0; i < num_threads; ++i) {
+			varThreads.emplace_back(bind(&computeVarFactor, data + p_indices[i], p_indices[i + 1] - p_indices[i], total_items, avg, ref(variances[i])));
+		}
+
+		for (auto& thread : varThreads)
+			thread.join();
+
+		for (int i = 0; i < num_threads; ++i)
+			var += variances[i];
+
 
 		ofstream target(target_file, ios::binary);
 		if ((success = (target.is_open()))) {
