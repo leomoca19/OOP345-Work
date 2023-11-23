@@ -108,10 +108,10 @@ namespace sdds
 	// Save the data into a file with filename held by the argument fname_target. 
 	// Also, read the workshop instruction.
 	int ProcessData::operator()(const string& target_file, double& avg, double& var) {
+		vector<thread> avgThreads;
 		int success{};
 
 		// averages
-		vector<thread> avgThreads;
 		for (int i = 0; i < num_threads; ++i)
 			avgThreads.emplace_back(bind(&computeAvgFactor, data + p_indices[i], p_indices[i + 1] - p_indices[i], total_items, ref(averages[i])));
 
@@ -122,7 +122,7 @@ namespace sdds
 			avg += averages[i];
 
 
-		// variance 
+		// variances
 		vector<thread> varThreads;
 		for (int i = 0; i < num_threads; ++i) {
 			varThreads.emplace_back(bind(&computeVarFactor, data + p_indices[i], p_indices[i + 1] - p_indices[i], total_items, avg, ref(variances[i])));
