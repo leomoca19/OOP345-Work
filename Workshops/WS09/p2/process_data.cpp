@@ -1,3 +1,4 @@
+
 // Workshop 9 - Multi-Threading, Thread Class
 // process_data.cpp
 // 2021/1/5 - Jeevan Pant
@@ -51,7 +52,7 @@ namespace sdds
 	//   to hold the data items, and reads the data items into the allocated memory space. 
 	//   It prints first five data items and the last three data items as data samples. 
 	//   
-	ProcessData::ProcessData(const string& filename, int n_threads) {  
+	ProcessData::ProcessData(const string& filename, int n_threads) {
 		// TODO: Open the file whose name was received as parameter and read the content
 		//         into variables "total_items" and "data". Don't forget to allocate
 		//         memory for "data".
@@ -69,17 +70,17 @@ namespace sdds
 		file.read(reinterpret_cast<char*>(data), total_items * sizeof(int));
 
 
-		cout << "Item's count in file '"<< filename << "': " << total_items << endl;
+		cout << "Item's count in file '" << filename << "': " << total_items << endl;
 		cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
-		          << data[total_items - 3] << ", " << data[total_items - 2] << ", "
-		          << data[total_items - 1] << "]" << endl;
+			<< data[total_items - 3] << ", " << data[total_items - 2] << ", "
+			<< data[total_items - 1] << "]" << endl;
 
 		// Following statements initialize the variables added for multi-threaded 
 		//   computation
-		num_threads = n_threads; 
+		num_threads = n_threads;
 		averages = new double[num_threads] {};
 		variances = new double[num_threads] {};
-		p_indices = new int[num_threads+1] {};
+		p_indices = new int[num_threads + 1] {};
 		for (int i = 0; i < num_threads; i++)
 			p_indices[i] = i * (total_items / num_threads);
 		p_indices[num_threads] = total_items;
@@ -110,11 +111,32 @@ namespace sdds
 	int ProcessData::operator()(const string& target_file, double& avg, double& var) {
 		int success{};
 
-		computeAvgFactor(data, total_items, total_items, avg);
-		computeVarFactor(data, total_items, total_items, avg, var);
+		// averages
+		vector<thread> avgThreads;
+		for (int i = 0; i < num_threads; ++i) 
+			avgThreads.emplace_back(bind(&computeAvgFactor, data + p_indices[i], p_indices[i + 1] - p_indices[i], total_items, ref(averages[i])));
+
+		for (auto& thread : avgThreads) 
+			thread.join();
+
+		for (int i = 0; i < num_threads; ++i) 
+			avg += averages[i];
+
+
+		// variance 
+		vector<thread> varThreads;
+		for (int i = 0; i < num_threads; ++i) {
+			varThreads.emplace_back(bind(&computeVarFactor, data + p_indices[i], p_indices[i + 1] - p_indices[i], total_items, avg, ref(variances[i])));
+		}
+
+		for (auto& thread : varThreads) 
+			thread.join();
+
+		for (int i = 0; i < num_threads; ++i)
+			var += variances[i];
+
 
 		ofstream target(target_file, ios::binary);
-
 		if ((success = (target.is_open()))) {
 			target.write(reinterpret_cast<char*>(&total_items), sizeof(int));
 			target.write(reinterpret_cast<char*>(data), total_items * sizeof(int));
@@ -122,6 +144,6 @@ namespace sdds
 		else
 			throw runtime_error("Error: Unable to open the file '" + target_file + "'");
 
-		return success; 
+		return success;
 	}
 }
