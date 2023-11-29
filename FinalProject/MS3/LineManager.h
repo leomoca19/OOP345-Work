@@ -19,7 +19,7 @@ namespace sdds {
 	public:
 
 		/// \brief configures the assembly line based on the given file and collection of workstations:
-		/// Reads the contents of the file to determine the order of workstations on the assembly line. Stores the address of the next workstation in each element of the collection and identifies the first station in the assembly line, storing its address in the m_firstStation attribute. Additionally, it updates the attribute that holds the total number of orders in the g_pending queue. If an error occurs during this process, the constructor reports the error.
+		/// Stores the workstations in the order received in m_activeLine. It loads the contents of the file, stores the address of the next workstation in each element of the collection, identifies the first station in the assembly line and stores its address in the m_firstStation. Also updates the total number of orders in g_pending queue. If an error occurs during this process, the constructor reports the error.
 		/// \param file The name of the file that identifies the active stations on the assembly line 
 		/// \param stations A collection of workstations available for configuring the assembly line
 		LineManager(const std::string& file, const std::vector<Workstation*>& stations);
