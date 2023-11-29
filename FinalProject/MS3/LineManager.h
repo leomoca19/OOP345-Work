@@ -8,7 +8,7 @@
 #ifndef SDDS_LINEMANAGER_H
 #define SDDS_LINEMANAGER_H
 namespace sdds {
-	class LLineManager {
+	class LineManager {
 
 	};
 }
