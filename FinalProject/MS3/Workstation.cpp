@@ -22,4 +22,24 @@ namespace sdds {
 		}
 	}
 
+	bool Workstation::attemptToMoveOrder()
+	{
+		bool moved{};
+
+		return moved;
+	}
+
+	void Workstation::setNextStation(Workstation* station)
+	{
+	}
+
+	void Workstation::display(std::ostream& os) const
+	{
+	}
+
+	Workstation& Workstation::operator+=(CustomerOrder&& newOrder)
+	{
+		return *this;
+	}
+
 }
