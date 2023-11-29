@@ -12,6 +12,11 @@
 #include "Station.h"
 #include "CustomerOrder.h"
 namespace sdds{
+	extern std::deque<CustomerOrder>
+		g_pending, 
+		g_completed,
+		g_incomplete;
+
 	class Workstation : public Station {
 		std::deque<CustomerOrder> m_orders;
 		Workstation* m_pNextStation{};

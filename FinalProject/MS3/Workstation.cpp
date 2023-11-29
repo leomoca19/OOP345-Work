@@ -8,5 +8,8 @@
 #include "Workstation.h"
 using namespace std;
 namespace sdds {
-
+	std::deque<CustomerOrder>
+		g_pending,
+		g_completed,
+		g_incomplete;
 }
