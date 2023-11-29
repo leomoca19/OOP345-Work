@@ -12,4 +12,14 @@ namespace sdds {
 		g_pending,
 		g_completed,
 		g_incomplete;
+
+	void Workstation::fill(std::ostream& os)
+	{
+		if (m_orders.size())
+		{
+			m_orders.front().fillItem(*this, os);
+			m_orders.pop_front();
+		}
+	}
+
 }
