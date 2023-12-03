@@ -33,7 +33,6 @@ namespace sdds {
 			updates the current object's m_widthField data member if its current value is less than the size of the token extracted.
 			Note : in this application, str represents a single line that has been read from an input file.*/
 
-
 		for (;!found && (more = i < str.length()); i++)
 			if ((found = str[i] == m_delimiter))
 				break;
