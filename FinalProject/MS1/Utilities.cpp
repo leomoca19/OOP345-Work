@@ -26,6 +26,13 @@ namespace sdds {
 		size_t i{ next_pos };
 		bool found{};
 
+
+		/*uses the delimiter to extract the next token from str starting at position next_pos.
+			If successful, return a copy of the extracted token found(without spaces at the beginning / end), update next_pos with the position of the next token, and set more to true (false otherwise).
+			reports an exception if a delimiter is found at next_pos.
+			updates the current object's m_widthField data member if its current value is less than the size of the token extracted.
+			Note : in this application, str represents a single line that has been read from an input file.*/
+
 		for (;!found && (more = i < str.length()); i++)
 			if ((found = str[i] == m_delimiter))
 				break;
