@@ -24,21 +24,27 @@ namespace sdds {
 		size_t next_pos{};
 		bool more{ true };
 
-		m_name = util.extractToken(record, next_pos, more);
-		m_product = util.extractToken(record, next_pos, more);
+		try{
+			m_name = util.extractToken(record, next_pos, more);
+			m_product = util.extractToken(record, next_pos, more);
 
-		while (more) {
-			string itemname = util.extractToken(record, next_pos, more);
-			auto temp = new Item* [m_cntItem + 1];
+			while (more) {
+				string itemname = util.extractToken(record, next_pos, more);
+				auto temp = new Item * [m_cntItem + 1];
 
-			for (size_t i{}; i < m_cntItem; ++i)
-				temp[i] = m_lstItem[i];
-			temp[m_cntItem++] = new Item(itemname);
+				for (size_t i{}; i < m_cntItem; ++i)
+					temp[i] = m_lstItem[i];
+				temp[m_cntItem++] = new Item(itemname);
 
-			delete[] m_lstItem;
-			m_lstItem = temp;
+				delete[] m_lstItem;
+				m_lstItem = temp;
 
-			m_widthField = max(util.getFieldWidth(), m_widthField);
+				m_widthField = max(util.getFieldWidth(), m_widthField);
+			}
+		}
+		catch(const exception& e){
+			cerr << "Error during CustomerOrder construction: " << e.what() << '\n';
+			throw;
 		}
 	}
 	CustomerOrder::CustomerOrder(CustomerOrder&& other) noexcept
