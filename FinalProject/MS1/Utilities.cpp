@@ -28,8 +28,8 @@ namespace sdds {
 
 
 		// uses the delimiter to extract the next token from str starting at position next_pos.
-		while (!found && i < str.length())
-			found = str[i] == m_delimiter;
+		while (!(found = (str[i] == m_delimiter)) && i < str.length())
+			i++;
 
 		// if m_delimiter was found
 		// else
