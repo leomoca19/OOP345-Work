@@ -27,38 +27,29 @@ namespace sdds {
 		bool found{};
 
 
-		/*uses the delimiter to extract the next token from str starting at position next_pos.
-			If successful, return a copy of the extracted token found(without spaces at the beginning / end), update next_pos with the position of the next token, and set more to true (false otherwise).
-			reports an exception if a delimiter is found at next_pos.
-			updates the current object's m_widthField data member if its current value is less than the size of the token extracted.
-			Note : in this application, str represents a single line that has been read from an input file.*/
 
 
-		for (;!found && (more = i < str.length()); i++)
-			if ((found = str[i] == m_delimiter))
-				break;
-
-		try { // can be more consice, but my brain is fried
-			if ((found && !more) || i == next_pos)
-			{
-				more = 0;
-				throw false;
-			}
-
-			else if (!found && !more)
-				throw true;
+		try {
+			// uses the delimiter to extract the next token from str starting at position next_pos.
 		}
-		catch (bool& valid) {
-			if (!valid)
-				throw "bad token";
+		catch () {
+			// reports an exception if a delimiter is found at next_pos
 		}
 
-		token = str.substr(next_pos, i - next_pos);
-		next_pos = i + 1;
 
+		// if comes out of the try, was successfull
+		
+		// copy of the extracted token found(without spaces at the beginning / end)
 		trim(token);
-		m_widthField = std::max(m_widthField, token.length());
+		//update next_pos with the position of the next token
+		next_pos = i++;
+		// updates m_widthField if its current value is less than the size of the token extracted
+		m_widthField = max(m_widthField, token.length());
+		//more to true
+		more = true
 
+
+		// return a copy of the extracted token
 		return token;
 	}
 
