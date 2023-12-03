@@ -51,7 +51,7 @@ namespace sdds {
 		// updates m_widthField if its current value is less than the size of the token extracted
 		m_widthField = max(m_widthField, token.length());
 		//more to true
-		more = true
+		more = true;
 
 
 		// return a copy of the extracted token
