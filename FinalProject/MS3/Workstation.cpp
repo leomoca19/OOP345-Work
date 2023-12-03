@@ -29,10 +29,6 @@ namespace sdds {
 		return moved;
 	}
 
-	void Workstation::setNextStation(Workstation* station)
-	{
-	}
-
 	void Workstation::display(std::ostream& os) const
 	{
 	}
