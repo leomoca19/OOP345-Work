@@ -22,35 +22,26 @@ namespace sdds {
 	}
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
-		string token{};
-		size_t i{ next_pos };
-		bool found{};
+		string token;
+		size_t i = next_pos;
 
-		for (;!found && (more = i < str.length()); i++)
-			if ((found = str[i] == m_delimiter))
-				break;
+		while (i < str.length() && str[i] != m_delimiter) 
+			++i;
+		
 
-		try { // can be more consice, but my brain is fried
-			if ((found && !more) || i == next_pos)
-			{
-				more = 0;
-				throw false;
-			}
-
-			else if (!found && !more)
-				throw true;
-		}
-		catch (bool& valid) {
-			if (!valid)
-				throw "bad token";
+		if (i == next_pos || (i == str.length() && str[i - 1] == m_delimiter)) {
+			more = false;
+			throw runtime_error("Error: Bad token");
 		}
 
 		token = str.substr(next_pos, i - next_pos);
+
 		next_pos = i + 1;
-
 		trim(token);
-		m_widthField = std::max(m_widthField, token.length());
 
+		m_widthField = max(m_widthField, token.length());
+
+		more = true;
 		return token;
 	}
 
