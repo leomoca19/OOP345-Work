@@ -40,7 +40,7 @@ namespace sdds {
 
 
 		if (!success)
-			throw "Delimiter is found at next_pos"
+			throw "Delimiter is found at next_pos";
 
 		// if gets past this line, was successfull
 		
