@@ -48,7 +48,7 @@ namespace sdds{
 		/// stores the address of the referenced Workstation object in the pointer to the m_pNextStation
 		/// </summary>
 		/// <param name="station">defaults to nullptr</param>
-		void setNextStation(Workstation* station = nullptr); 
+		void setNextStation(Workstation* station = nullptr) { m_pNextStation = station; }
 
 		/// <returns>address of next Workstation</returns>
 		Workstation* getNextStation() const { return m_pNextStation; }
