@@ -28,15 +28,21 @@ namespace sdds {
 
 
 		// uses the delimiter to extract the next token from str starting at position next_pos.
-		
+		while (!found && i < str.length())
+			found = str[i] == m_delimiter;
+
+		// if m_delimiter was found
+		// else
+
+		// if more
+		// else
+
+
 
 		if (!success)
 			throw "Delimiter is found at next_pos"
 
-
-
-
-		// if comes out of the try, was successfull
+		// if gets past this line, was successfull
 		
 		// copy of the extracted token found(without spaces at the beginning / end)
 		trim(token);
