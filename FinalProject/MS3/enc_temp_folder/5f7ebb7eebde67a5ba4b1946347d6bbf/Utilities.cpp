@@ -27,6 +27,9 @@ namespace sdds {
 		bool found{};
 
 
+
+
+
 		/*uses the delimiter to extract the next token from str starting at position next_pos.
 	If successful, return a copy of the extracted token found(without spaces at the beginning / end), update next_pos with the position of the next token, and set more to true (false otherwise).
 	reports an exception if a delimiter is found at next_pos.
