@@ -24,17 +24,16 @@ namespace sdds {
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
 		string token{};
 		size_t i{ next_pos };
-		bool found{};
+		bool found{}, success{};
 
 
+		// uses the delimiter to extract the next token from str starting at position next_pos.
+		
+
+		if (!success)
+			throw "Delimiter is found at next_pos"
 
 
-		try {
-			// uses the delimiter to extract the next token from str starting at position next_pos.
-		}
-		catch () {
-			// reports an exception if a delimiter is found at next_pos
-		}
 
 
 		// if comes out of the try, was successfull
