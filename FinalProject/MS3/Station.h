@@ -5,8 +5,8 @@
 //
 // I confirm that I am the only author of this file
 // and the content was created entirely by me.
-#ifndef STAION_H
-#define STAION_H
+#ifndef STATION_H
+#define STATION_H
 #include <string>
 namespace sdds {
 	class Station {
@@ -95,4 +95,4 @@ namespace sdds {
 		void display(std::ostream& os, bool full) const;			
 	};
 }
-#endif // !STAION_H
+#endif // !STATION_H
