@@ -11,62 +11,73 @@
 #include "Utilities.h"
 using namespace std;
 namespace sdds {
-	LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations)
+	LineManager::LineManager(const string& file, const vector<Workstation*>& stations)
 	{
 		Utilities util;
-		ifstream input;
-		string record;
+		string record{};
+		ifstream input(file);
 
-		if (file.empty()) 
-			throw string("ERROR: No filename provided.");
-
-		input.open(file);
 		if (!input)
 			throw string("Unable to open file ") + file;
 
 
 		while (getline(input, record)) {
-			Workstation* currentSt;
-			Workstation* nextSt;
-			size_t next_pos{};
+			size_t next_pos{ 0 };
 			bool more{ true };
+			string current{}, next{};
 
+			// Extract current and next workstation names from the record
+			current = util.extractToken(record, next_pos, more);
+			next = util.extractToken(record, next_pos, more);
 
-			//////the error is here, after finding the name of th station, it must find the line or something like that
-			currentSt = new Workstation(util.extractToken(record, next_pos, more));
-			nextSt = new Workstation(util.extractToken(record, next_pos, more));
-			//////
+			// Define lambda functions to find workstations by name
+			auto findCurrent = [&](const Workstation* station) { 
+				return station->getItemName() == current; 
+			};
+			auto findNext = [&](const Workstation* station) { 
+				return station->getItemName() == next; 
+			};
 
+			// Find iterators pointing to the current and next workstations in the collection
+			auto currentIt = find_if(stations.begin(), stations.end(), findCurrent);
+			auto nextIt = find_if(stations.begin(), stations.end(), findNext);
 
-			//load the contents of the file
-
-
-			m_activeLine.push_back(currentSt);
-			m_activeLine.push_back(nextSt);
-
-
-			currentSt->setNextStation(nextSt);
+			// Check if both current and next workstations are found in the collection
+			if (currentIt != stations.end() && nextIt != stations.end())
+				// Link the current workstation to the next workstation
+				(*currentIt)->setNextStation(*nextIt);
+			else
+				// Throw an exception if the linkage is unsuccessful
+				throw string("Unable to link stations [") + current + "] to [" + next + "].";
 		}
 
-		if (!m_activeLine.empty()) 
-			m_firstStation = m_activeLine.front();
+		// Reserve space for the m_activeLine vector to improve performance
+		m_activeLine.reserve(stations.size());
+
+		// Find the iterator pointing to the first station on the assembly line
+		auto it = find_if(stations.begin(), stations.end(),
+			[&](const Workstation* station) { 
+				return station->getNextStation() == nullptr; 
+			}
+		);
+
+		// Check if the first station is found
+		if (it != stations.end()) {
+			m_firstStation = *it;
+			m_cntCustomerOrder = g_pending.size();
+		}
 		else 
-			throw std::string("ERROR: No workstations found in the file.");
-
-
-		m_cntCustomerOrder = g_pending.size();
-
-		input.close();
+			throw string("Unable to find the first station on the assembly line.");
 	}
 	void LineManager::reorderStations()
 	{
 	}
-	bool LineManager::run(std::ostream& os)
+	bool LineManager::run(ostream& os)
 	{
 		bool filled{};
 		return filled;
 	}
-	void LineManager::display(std::ostream& os) const
+	void LineManager::display(ostream& os) const
 	{
 	}
 }
