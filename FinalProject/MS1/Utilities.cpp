@@ -36,7 +36,7 @@ namespace sdds {
 		if (i == next_pos)
 		{
 			more = false;
-			throw "Delimiter is found at next_pos";
+			throw string("Delimiter is found at next_pos");
 		}
 
 		token = str.substr(next_pos, i - next_pos);
