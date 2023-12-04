@@ -31,11 +31,11 @@ namespace sdds {
 			i++;
 
 		if (!found)
-			more = 0;
+			more = false;
 
 		if (i == next_pos)
 		{
-			more = 0;
+			more = false;
 			throw "Delimiter is found at next_pos";
 		}
 
