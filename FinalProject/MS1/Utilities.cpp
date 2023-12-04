@@ -13,14 +13,6 @@ using namespace std;
 namespace sdds {
 	char Utilities::m_delimiter = '\0';
 
-	void Utilities::setFieldWidth(size_t newWidth) {
-		m_widthField = newWidth;
-	}
-
-	size_t Utilities::getFieldWidth() const {
-		return m_widthField;
-	}
-
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
 		string token{};
 		size_t i{ next_pos };
@@ -46,14 +38,6 @@ namespace sdds {
 		m_widthField = max(m_widthField, token.length());
 
 		return token;
-	}
-
-	void Utilities::setDelimiter(char newDelimiter) {
-		m_delimiter = newDelimiter;
-	}
-
-	char Utilities::getDelimiter() {
-		return m_delimiter;
 	}
 
 	string& trim(string& str)

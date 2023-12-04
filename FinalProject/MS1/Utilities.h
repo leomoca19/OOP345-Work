@@ -17,12 +17,12 @@ namespace sdds {
 		/// <summary>
 		/// sets the field width of the current object to the value of parameter `newWidth`
 		/// </summary>
-		void setFieldWidth(size_t newWidth);
+		void setFieldWidth(size_t newWidth) { m_widthField = newWidth; }
 
 		/// <summary>
 		/// returns the field width of the current object
 		/// </summary>
-		size_t getFieldWidth() const;
+		size_t getFieldWidth() const{ return m_widthField; }
 
 		/// <summary>
 		///  extracts a token from string `str` referred to by the first parameter
@@ -48,12 +48,12 @@ namespace sdds {
 		/// <summary>
 		/// sets the delimiter for this class to the character received
 		/// </summary>
-		static void setDelimiter(char newDelimiter);
+		static void setDelimiter(char newDelimiter){ m_delimiter = newDelimiter; }
 
 		/// <summary>
 		/// returns the delimiter for this class
 		/// </summary>
-		static char getDelimiter();
+		static char getDelimiter(){ return m_delimiter; }
 	};
 
 	std::string& trim(std::string& str);
