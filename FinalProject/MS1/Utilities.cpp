@@ -41,17 +41,10 @@ namespace sdds {
 
 		token = str.substr(next_pos, i - next_pos);
 
-		// copy of the extracted token found(without spaces at the beginning / end)
 		trim(token);
-		//update next_pos with the position of the next token
 		next_pos = ++i;
-		// updates m_widthField if its current value is less than the size of the token extracted
 		m_widthField = max(m_widthField, token.length());
-		//more to true
-		more = true;
 
-
-		// return a copy of the extracted token
 		return token;
 	}
 
