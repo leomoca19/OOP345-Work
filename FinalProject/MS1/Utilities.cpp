@@ -27,7 +27,6 @@ namespace sdds {
 		bool found{};
 
 
-		// uses the delimiter to extract the next token from str starting at position next_pos.
 		while (!(found = (str[i] == m_delimiter)) && i < str.length())
 			i++;
 
@@ -35,7 +34,10 @@ namespace sdds {
 			more = 0;
 
 		if (i == next_pos)
+		{
+			more = 0;
 			throw "Delimiter is found at next_pos";
+		}
 
 		token = str.substr(next_pos, i - next_pos);
 
