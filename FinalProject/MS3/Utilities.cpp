@@ -13,14 +13,6 @@ using namespace std;
 namespace sdds {
 	char Utilities::m_delimiter = '\0';
 
-	void Utilities::setFieldWidth(size_t newWidth) {
-		m_widthField = newWidth;
-	}
-
-	size_t Utilities::getFieldWidth() const {
-		return m_widthField;
-	}
-
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
 		string token{};
 		size_t i{ next_pos };
@@ -48,28 +40,16 @@ namespace sdds {
 		return token;
 	}
 
-	void Utilities::setDelimiter(char newDelimiter) {
-		m_delimiter = newDelimiter;
-	}
-
-	char Utilities::getDelimiter() {
-		return m_delimiter;
-	}
-
 	string& trim(string& str)
 	{
-		size_t trimStart;
-		size_t trimEnd;
+		size_t trimStart = str.find_first_not_of(' ');
+		size_t trimEnd = str.find_last_not_of(' ');
 
-		trimStart = str.find_first_not_of(' ');
-		trimEnd = str.find_last_not_of(' ');
-
-		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) {
+		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd)
 			str = str.substr(trimStart, trimEnd - trimStart + 1);
-		}
-		else if (trimStart != string::npos) {
+
+		else if (trimStart != string::npos)
 			str = str.substr(trimStart);
-		}
 
 		return str;
 	}
