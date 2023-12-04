@@ -27,7 +27,7 @@ namespace sdds {
 		bool found{};
 
 
-		while (!(found = (str[i] == m_delimiter)) && i < str.length())
+		while (i < str.length() && !(found = (str[i] == m_delimiter)))
 			i++;
 
 		if (!found)
