@@ -22,26 +22,29 @@ namespace sdds {
 	}
 
 	string Utilities::extractToken(const string& str, size_t& next_pos, bool& more) {
-		string token;
-		size_t i = next_pos;
+		string token{};
+		size_t i{ next_pos };
+		bool found{};
 
-		while (i < str.length() && str[i] != m_delimiter) 
-			++i;
-		
 
-		if (i == next_pos || (i == str.length() && str[i - 1] == m_delimiter)) {
+		while (i < str.length() && !(found = (str[i] == m_delimiter)))
+			i++;
+
+		if (!found)
 			more = false;
-			throw runtime_error("Error: Bad token");
+
+		if (i == next_pos)
+		{
+			more = false;
+			throw string("Delimiter is found at next_pos");
 		}
 
 		token = str.substr(next_pos, i - next_pos);
 
-		next_pos = i + 1;
 		trim(token);
-
+		next_pos = ++i;
 		m_widthField = max(m_widthField, token.length());
 
-		more = true;
 		return token;
 	}
 
@@ -55,14 +58,19 @@ namespace sdds {
 
 	string& trim(string& str)
 	{
-		size_t trimStart = str.find_first_not_of(' ');
-		size_t trimEnd = str.find_last_not_of(' ');
+		size_t trimStart;
+		size_t trimEnd;
 
-		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd)
+		trimStart = str.find_first_not_of(' ');
+		trimEnd = str.find_last_not_of(' ');
+
+		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) {
 			str = str.substr(trimStart, trimEnd - trimStart + 1);
-		else if (trimStart != string::npos) 
+		}
+		else if (trimStart != string::npos) {
 			str = str.substr(trimStart);
-		
+		}
+
 		return str;
 	}
 }
