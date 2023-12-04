@@ -58,19 +58,15 @@ namespace sdds {
 
 	string& trim(string& str)
 	{
-		size_t trimStart;
-		size_t trimEnd;
+		size_t trimStart = str.find_first_not_of(' ');
+		size_t trimEnd = str.find_last_not_of(' ');
 
-		trimStart = str.find_first_not_of(' ');
-		trimEnd = str.find_last_not_of(' ');
-
-		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) {
+		if (trimStart != string::npos && trimEnd != string::npos && trimStart < trimEnd) 
 			str = str.substr(trimStart, trimEnd - trimStart + 1);
-		}
-		else if (trimStart != string::npos) {
+		
+		else if (trimStart != string::npos) 
 			str = str.substr(trimStart);
-		}
-
+		
 		return str;
 	}
 }
