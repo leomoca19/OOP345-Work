@@ -59,7 +59,7 @@ namespace sdds {
 	{
 		os << getItemName() 
 			<< " --> "
-			<< (m_pNextStation 
+			<< (!m_pNextStation 
 				? "End of Line" 
 				: m_pNextStation->getItemName()) 
 			<< '\n';
