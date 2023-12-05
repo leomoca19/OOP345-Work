@@ -56,10 +56,10 @@ namespace sdds {
 		if (this != &other) {
 			clearLstItem();
 
-			m_name = std::move(other.m_name);
-			m_product = std::move(other.m_product);
-			m_cntItem = std::move(other.m_cntItem);
-			m_lstItem = std::move(other.m_lstItem);
+			m_name = move(other.m_name);
+			m_product = move(other.m_product);
+			m_cntItem = move(other.m_cntItem);
+			m_lstItem = move(other.m_lstItem);
 
 			other.m_name.clear();
 			other.m_product.clear();
