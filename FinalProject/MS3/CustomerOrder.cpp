@@ -100,32 +100,48 @@ namespace sdds {
 	}
 	void CustomerOrder::fillItem(Station& station, std::ostream& os)
 	{
-		for (size_t i = 0; i < m_cntItem; ++i)
-		{
-			if (m_lstItem[i]->m_itemName == station.getItemName())
-			{
-				if (!m_lstItem[i]->m_isFilled)
-				{
-					if (station.getQuantity() > 0)
-					{
-						m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
-						m_lstItem[i]->m_isFilled = true;
-						station.updateQuantity();
+		//for (size_t i = 0; i < m_cntItem; ++i)
+		//{
+		//	if (m_lstItem[i]->m_itemName == station.getItemName())
+		//	{
+		//		if (!m_lstItem[i]->m_isFilled)
+		//		{
+		//			if (station.getQuantity() > 0)
+		//			{
+		//				m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+		//				m_lstItem[i]->m_isFilled = true;
+		//				station.updateQuantity();
 
-						os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-					}
-					else
-					{
-						os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-					}
+		//				os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+		//			}
+		//			else
+		//			{
+		//				os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+		//			}
+		//		}
+		//		else
+		//		{
+		//			os << "    " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "] already filled" << std::endl;
+		//		}
+		//		break;
+		//	}
+		//}
+
+		for (size_t i = 0; i < m_cntItem; i++) 
+			if (m_lstItem[i]->m_itemName == station.getItemName()) {
+				if (station.getQuantity()) {
+					m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+					m_lstItem[i]->m_isFilled = true;
+					station.updateQuantity();
+					os << "    Filled ";
 				}
-				else
-				{
-					os << "    " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "] already filled" << std::endl;
-				}
-				break;
+				else 
+					os << "    Unable to fill " ;
+
+				os << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]\n";
 			}
-		}
+		
+
 	}
 	void CustomerOrder::display(std::ostream& os) const
 	{
