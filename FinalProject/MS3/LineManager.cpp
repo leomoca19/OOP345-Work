@@ -21,8 +21,8 @@ namespace sdds {
 		ifstream input(file);
 
 		// temp stations and their string names
-		string current{}, next{}, first{};
-		Workstation* currentSt{}, * nextSt{}, * firstSt;
+		string current{}, next{};
+		Workstation* currentSt{}, * nextSt{}, * firstSt{};
 
 		if (!input)
 			throw string("Unable to open file ") + file;
@@ -35,26 +35,24 @@ namespace sdds {
 			bool more{ true };
 
 			current = util.extractToken(record, next_pos, more);
-			currentSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+			currentSt= *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
 				return station->getItemName() == current;
 				});
 			m_activeLine.push_back(currentSt);
 
 			if (more) {
 				next = util.extractToken(record, next_pos, more);
-				nextSt = *find_if(stations.begin(), stations.end(),
-					[&](Workstation* station) {
-						return station->getItemName() == next;
-					}
-				);
+				nextSt= *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+					return station->getItemName() == next;
+					});
 				currentSt->setNextStation(nextSt);
 			}
 		}
-		for (const auto& station: stations) {
+		for_each(stations.begin(), stations.end(), [&](Workstation* station) {
 			firstSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
 				return station->getNextStation() == firstSt;
 				});
-			}
+			});
 
 		m_firstStation = firstSt;
 
@@ -96,7 +94,8 @@ namespace sdds {
 	}
 	void LineManager::display(ostream& os) const
 	{
-		for (const auto& station : m_activeLine)
-			station->display(os);
+		for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* station) {
+			station->display(os); 
+			});
 	}
 }
