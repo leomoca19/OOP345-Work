@@ -14,44 +14,52 @@
 #include "Utilities.h"
 using namespace std;
 namespace sdds {
-	LineManager::LineManager(const std::string& filename, const std::vector<Workstation*>& stations) {
-		Utilities util;
-		ifstream file(filename);
-		if (!file) {
-			throw "Incorrect file name!";
-		}
-		else {
-			string str = "";
-			string currentStr = "";
-			string nextStr = "";
-			bool more;
-			size_t next_pos = 0;
-			Workstation* currentStation = nullptr;
-			Workstation* nextStation = nullptr;
-			Workstation* firstStation = nullptr;
-			while (getline(file, str)) {
-				currentStr = util.extractToken(str, next_pos, more);
-				currentStation = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
-					return station->getItemName() == currentStr;
-					});
-				m_activeLine.push_back(currentStation);
-				if (more) {
-					nextStr = util.extractToken(str, next_pos, more);
-					nextStation = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
-						return station->getItemName() == nextStr;
-						});
-					currentStation->setNextStation(nextStation);
-				}
-			}
-			for_each(stations.begin(), stations.end(), [&](Workstation* station) {
-				firstStation = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
-					return station->getNextStation() == firstStation;
-					});
+	LineManager::LineManager(const string& file, const vector<Workstation*>& stations)
+	{
+		// to read from inputs
+		string record{};
+		ifstream input(file);
+
+		// temp stations and their string names
+		string current{}, next{}, first{};
+		Workstation* currentSt{}, * nextSt{}, * firstSt;
+
+		if (!input)
+			throw string("Unable to open file ") + file;
+
+
+		while (getline(input, record)) {
+			// to use Utilities class
+			Utilities util;
+			size_t next_pos{ 0 };
+			bool more{ true };
+
+			current = util.extractToken(record, next_pos, more);
+			currentSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+				return station->getItemName() == current;
 				});
-			m_firstStation = firstStation;
+			m_activeLine.push_back(currentSt);
+
+			if (more) {
+				next = util.extractToken(record, next_pos, more);
+				nextSt = *find_if(stations.begin(), stations.end(),
+					[&](Workstation* station) {
+						return station->getItemName() == next;
+					}
+				);
+				currentSt->setNextStation(nextSt);
+			}
 		}
-		file.close();
+		for (const auto& station: stations) {
+			firstSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+				return station->getNextStation() == firstSt;
+				});
+			}
+
+		m_firstStation = firstSt;
+
 		m_cntCustomerOrder = g_pending.size();
+		input.close();
 	}
 
 	void LineManager::reorderStations()
