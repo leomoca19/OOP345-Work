@@ -35,14 +35,14 @@ namespace sdds {
 			bool more{ true };
 
 			current = util.extractToken(record, next_pos, more);
-			currentSt= *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+			currentSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
 				return station->getItemName() == current;
 				});
 			m_activeLine.push_back(currentSt);
 
 			if (more) {
 				next = util.extractToken(record, next_pos, more);
-				nextSt= *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+				nextSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
 					return station->getItemName() == next;
 					});
 				currentSt->setNextStation(nextSt);
