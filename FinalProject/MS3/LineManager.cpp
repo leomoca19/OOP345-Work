@@ -16,81 +16,79 @@ using namespace std;
 namespace sdds {
 	LineManager::LineManager(const string& file, const vector<Workstation*>& stations)
 	{
-		// to read from inputs
 		string record{};
 		ifstream input(file);
-
-		// temp stations and their string names
-		string current{}, next{};
-		Workstation* currentSt{}, * nextSt{}, * firstSt{};
 
 		if (!input)
 			throw string("Unable to open file ") + file;
 
 
 		while (getline(input, record)) {
-			// to use Utilities class
 			Utilities util;
 			size_t next_pos{ 0 };
 			bool more{ true };
+			Workstation *nextSt{};
 
-			current = util.extractToken(record, next_pos, more);
-			currentSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+			const auto current = util.extractToken(record, next_pos, more);
+			const auto currentSt = find_if(stations.begin(), stations.end(), [&current](Workstation* station) {
 				return station->getItemName() == current;
 				});
-			m_activeLine.push_back(currentSt);
 
 			if (more) {
-				next = util.extractToken(record, next_pos, more);
+				const auto next = util.extractToken(record, next_pos, more);
+
 				nextSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
 					return station->getItemName() == next;
 					});
-				currentSt->setNextStation(nextSt);
 			}
+
+			m_activeLine.emplace_back(*currentSt)->setNextStation(nextSt);
 		}
-		for_each(stations.begin(), stations.end(), [&](Workstation* station) {
-			firstSt = *find_if(stations.begin(), stations.end(), [&](Workstation* station) {
-				return station->getNextStation() == firstSt;
-				});
-			});
-
-		m_firstStation = firstSt;
-
+		
+		m_firstStation = m_activeLine.front();
 		m_cntCustomerOrder = g_pending.size();
 		input.close();
 	}
 
 	void LineManager::reorderStations()
 	{
-		Workstation* station = m_firstStation;
-		vector<Workstation*> reordered;
+		const auto last_station = find_if(m_activeLine.begin(), m_activeLine.end(), [](const Workstation* station) {
+			return !(*station).getNextStation();
+			});
 
-		while (station) {
-			reordered.push_back(station);
-			station = station->getNextStation();
+		swap(*last_station, m_activeLine.back());
+		const auto* station_ptr = &m_activeLine.back()->getItemName();
+
+		for (auto i = m_activeLine.size() - 1; i > 0; --i) {
+			const auto matching_station = find_if(m_activeLine.begin(), m_activeLine.end(), [&station_ptr](const Workstation* innerStation)
+				{return (*innerStation).getNextStation()->getItemName() == *station_ptr; });
+
+			swap(*matching_station, m_activeLine[i - 1]);
+			station_ptr = &m_activeLine[i - 1]->getItemName();
 		}
 
-		m_activeLine = reordered;
+		m_firstStation = m_activeLine.front();
 	}
 	bool LineManager::run(ostream& os)
 	{
-		static size_t count = 1;
-
-		os << "Line Manager Iteration: " << count++ << '\n';
+		static auto count = 1;
+		static const auto max_orders = g_pending.size();
+		os << "Line Manager Iteration: " << count << "\n";
 
 		if (!g_pending.empty()) {
 			*m_firstStation += move(g_pending.front());
 			g_pending.pop_front();
 		}
 
-		for (const auto& station : m_activeLine)
-			station->fill(os);
+		for_each(m_activeLine.begin(), m_activeLine.end(), [&os](Workstation* ws)
+			{ws->fill(os); });
 
-		for (const auto& station : m_activeLine)
-			station->attemptToMoveOrder();
+		for_each(m_activeLine.cbegin(), m_activeLine.cend(), [](Workstation* internal_ws)
+			{ internal_ws->attemptToMoveOrder(); });
 
-		return m_cntCustomerOrder == g_completed.size() + g_incomplete.size();
-	
+		++count;
+
+		return g_completed.size() + g_incomplete.size() == max_orders;
 	}
 	void LineManager::display(ostream& os) const
 	{
