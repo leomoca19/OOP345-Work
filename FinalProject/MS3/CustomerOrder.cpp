@@ -6,6 +6,8 @@
 // I confirm that I am the only author of this file
 // and the content was created entirely by me.
 #include <iomanip>
+#include <iostream>
+#include <string>
 #include "Utilities.h"
 #include "CustomerOrder.h"
 using namespace std;
@@ -18,7 +20,7 @@ namespace sdds {
 
 		delete[] m_lstItem;
 	}
-	CustomerOrder::CustomerOrder(const std::string& record)
+	CustomerOrder::CustomerOrder(const string& record)
 	{
 		Utilities util{};
 		size_t next_pos{};
@@ -81,69 +83,43 @@ namespace sdds {
 
 	bool CustomerOrder::isOrderFilled() const
 	{
-		bool allFilled{ true};
+		bool allFilled{true};
 
-		for (size_t i = 0; i < m_cntItem && allFilled; i++)
-			allFilled = m_lstItem[i]->m_isFilled;
-
+		for (size_t i = 0; i < m_cntItem && allFilled; ++i) 
+			if (!m_lstItem[i]->m_isFilled) 
+				allFilled = false;
+			
 		return allFilled;
 	}
-	bool CustomerOrder::isItemFilled(const std::string& itemName) const
+	bool CustomerOrder::isItemFilled(const string& itemName) const
 	{
 		bool allFilled{ true };
 
-		for (size_t i = 0; i < m_cntItem && allFilled; i++)
-			if (itemName == m_lstItem[i]->m_itemName)
-				allFilled = m_lstItem[i]->m_isFilled;
+		for (size_t i = 0; i < m_cntItem && allFilled; ++i) 
+			if (m_lstItem[i]->m_itemName == itemName && !m_lstItem[i]->m_isFilled) 
+				allFilled = false;
 
 		return allFilled;
 	}
-	void CustomerOrder::fillItem(Station& station, std::ostream& os)
+	void CustomerOrder::fillItem(Station& station, ostream& os)
 	{
-		//for (size_t i = 0; i < m_cntItem; ++i)
-		//{
-		//	if (m_lstItem[i]->m_itemName == station.getItemName())
-		//	{
-		//		if (!m_lstItem[i]->m_isFilled)
-		//		{
-		//			if (station.getQuantity() > 0)
-		//			{
-		//				m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
-		//				m_lstItem[i]->m_isFilled = true;
-		//				station.updateQuantity();
-
-		//				os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-		//			}
-		//			else
-		//			{
-		//				os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-		//			}
-		//		}
-		//		else
-		//		{
-		//			os << "    " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "] already filled" << std::endl;
-		//		}
-		//		break;
-		//	}
-		//}
-
-		for (size_t i = 0; i < m_cntItem; i++) 
-			if (m_lstItem[i]->m_itemName == station.getItemName()) {
-				if (station.getQuantity()) {
-					m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+		const auto& station_name = station.getItemName();
+		for (size_t i = 0; i < m_cntItem; ++i) 
+			if (m_lstItem[i]->m_itemName == station_name) {
+				if (!m_lstItem[i]->m_isFilled && station.getQuantity() > 0) {
 					m_lstItem[i]->m_isFilled = true;
 					station.updateQuantity();
-					os << "    Filled ";
+					m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+					os << "    Filled " << m_name << ", " << m_product << " [" << station_name << "]\n";
+					return;
 				}
-				else 
-					os << "    Unable to fill " ;
 
-				os << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]\n";
+				if (!m_lstItem[i]->m_isFilled && !station.getQuantity()) 
+					os << "    Unable to fill " << m_name << ", " << m_product
+						<< " [" << station_name << "]\n";
 			}
-		
-
 	}
-	void CustomerOrder::display(std::ostream& os) const
+	void CustomerOrder::display(ostream& os) const
 	{
 		os << m_name << " - " << m_product << '\n';
 		for (size_t i = 0; i < m_cntItem; i++) {
