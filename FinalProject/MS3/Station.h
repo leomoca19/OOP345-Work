@@ -10,88 +10,33 @@
 #include <string>
 namespace sdds {
 	class Station {
-		static size_t
-			m_widthField,
-			id_generator;
+		static inline size_t
+			m_widthField{1},
+			id_generator{};
 
-		int m_id;
+		int m_id{};
 
 		size_t
-			m_serial,
-			m_quantity;
+			m_serial{},
+			m_quantity{};
 
 		std::string
-			m_itemName,
-			m_description;
+			m_itemName{},
+			m_description{};
 
 	public:
-		/// <summary>
-		/// This string	contains a single record (one line) that has been retrieved from the 
-		///	input file specified by the	user
-		/// 
-		///	- this constructor uses a `Utilities` object (defined locally) to extract each token 
-		/// from the record and		populates the `Station` object accordingly
-		/// 
-		///	- this constructor assumes that the string contains 4 fields separated by the 
-		/// delimiter, in the following   	order:
-		///		-name of the item
-		///		- starting serial number
-		///		- quantity in stock
-		///		- description
-		///
-		///	- the token delimiter is a single character, specified by the client and previously stored 
-		/// into thec `Utilities` class of objects
-		/// 
-		///	- this constructor extracts *name*, *starting serial number*, and *quantity* from the string first
-		/// 
-		///	- before extracting *description*, it updates `Station::m_widthField` to the maximum 
-		/// value `Station::m_widthField` and `Utilities::m_widthField`
-		/// 
-		///	- **Note:**  the `display(...)` member function uses this field width to align the output across all
-		/// the	records retrieved from the file
-		/// </summary>
-		Station(const std::string& record);
+		Station() = default;
 
-		/// <summary>
-		/// -returns the name of the current `Station` object
-		/// </summary>
-		/// <returns></returns>
-		const std::string& getItemName() const;
+		explicit Station(const std::string& record);
 
-		/// <summary>
-		/// returns the next serial number to be used on the assembly line and increments `m_serialNumber`
-		/// </summary>
-		/// <returns></returns>
-		size_t getNextSerialNumber();
+		const std::string& getItemName() const { return m_itemName; }
 
-		/// <summary>
-		/// returns the remaining quantity of items in the `Station` object
-		/// </summary>
-		/// <returns></returns>
-		size_t getQuantity() const;
+		size_t getNextSerialNumber() { return m_serial++; }
 
-		/// <summary>
-		/// subtracts 1 from the available quantity; should not drop below 0
-		/// </summary>
-		void updateQuantity();
+		size_t getQuantity() const { return m_quantity; }
 
-		/// <summary>
-		///  inserts information about the current object into stream 'os'
-		///		-if the second parameter is `false`, this function inserts only the ID, name, and serial 
-		///		number in the format : `ID | NAME | SERIAL | `
-		/// 
-		///		-if the second parameter if `true`, this function inserts the information in the 
-		///		following format : `ID | NAME | SERIAL | QUANTITY | DESCRIPTION`
-		/// 
-		///		-the `ID` field uses 3 characters, the `NAME` field uses `m_widthField` characters,
-		///		 the `QUANTITY` field uses 4 characters, the `SERIAL` field uses 6 characters; the 
-		///		`DESCRIPTION` has no formatting options(see the sample output for other formatting 
-		///		options)
-		/// 
-		///		-this function terminates the printed message with an endline
-		/// </summary>
-		/// <param name="os"></param>
-		/// <param name="full"></param>
+		void updateQuantity() { m_quantity = m_quantity > 0 ? m_quantity - 1 : 0; }
+
 		void display(std::ostream& os, bool full) const;			
 	};
 }
