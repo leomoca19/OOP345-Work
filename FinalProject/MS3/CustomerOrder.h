@@ -20,7 +20,7 @@ namespace sdds {
 	};
 
 	class CustomerOrder {
-		static size_t m_widthField;
+		static inline size_t m_widthField{};
 
 		std::string m_name{};
 		std::string m_product{};
@@ -29,8 +29,8 @@ namespace sdds {
 
 		void clearLstItem();
 	public:
-		CustomerOrder() {}
-		CustomerOrder(const std::string& record);
+		CustomerOrder() = default;
+		explicit CustomerOrder(const std::string& record);
 		CustomerOrder(CustomerOrder&& other) noexcept;
 		CustomerOrder& operator=(CustomerOrder&& other) noexcept;
 		~CustomerOrder();

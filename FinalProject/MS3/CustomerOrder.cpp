@@ -12,7 +12,6 @@
 #include "CustomerOrder.h"
 using namespace std;
 namespace sdds {
-	size_t CustomerOrder::m_widthField{};
 	void CustomerOrder::clearLstItem()
 	{
 		for (size_t i = 0; i < m_cntItem; ++i)
