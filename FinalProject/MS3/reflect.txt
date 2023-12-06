@@ -1,0 +1,12 @@
+// Name: Leonardo de la mora Caceres
+// Seneca Student ID: 152877205
+// Seneca email: lde-la-mora-canceres@myseneca.ca
+// Date of completion: 2023-Dec-06
+
+The project presented numerous challenges, a major challenge involved navigating the flow of customer orders through different workstations. In the code, the Workstation class adeptly managed this by utilizing move semantics in the += operator, ensuring optimal performance for the assembly line simulation.
+
+Exception handling was another obstacle, especially when dealing with file input and potential construction errors. The implementation, as observed in the try-catch block in the CustomerOrder constructor, effectively captures exceptions and provides clear error messages, enhancing the program's robustness.
+
+Coordinating the movement of orders between workstations and managing station-specific stock inventories required a deep analysis. In the code, the attemptToMoveOrder method in the Workstation class handles this complexity, ensuring seamless order progression through the assembly line. The use of deques in the global containers (g_pending, g_completed, and g_incomplete) contributed to efficient order management, although careful synchronization and handling of edge cases were crucial.
+
+Additionally, the interaction between the LineManager and workstations introduced challenges related to station reordering. The reorderStations method effectively addressed this concern, ensuring the correct workstation sequence in the assembly line. Managing pointers to workstations required meticulous attention to avoid memory issues.
