@@ -12,7 +12,7 @@
 #include "Station.h"
 #include "CustomerOrder.h"
 namespace sdds{
-	extern std::deque<CustomerOrder>
+	inline std::deque<CustomerOrder>
 		g_pending, 
 		g_completed,
 		g_incomplete;
@@ -22,8 +22,8 @@ namespace sdds{
 		Workstation* m_pNextStation{};
 
 	public:
-
-		Workstation(const std::string& record) : Station(record){}
+		Workstation() = default;
+		explicit Workstation(const std::string& record) : Station(record){}
 		
 		Workstation(const Workstation& other) = delete;
 		Workstation& operator=(const Workstation& other) = delete;
@@ -32,42 +32,11 @@ namespace sdds{
 		Workstation& operator=(Workstation&& other) = delete;
 
 
-		/// <summary>
-		/// fills the order at the front of the queue only if there are CustomerOrders in the queue
-		/// </summary>
-		/// <param name="os"></param>
 		void fill(std::ostream& os); 
-
-		/// <summary>
-		/// moves order order at the front of the queue to next station in the assembly line
-		/// </summary>
-		/// <returns>true if an order has been moved</returns>
 		bool attemptToMoveOrder(); 
-
-		/// <summary>
-		/// stores the address of the referenced Workstation object in the pointer to the m_pNextStation
-		/// </summary>
-		/// <param name="station">defaults to nullptr</param>
 		void setNextStation(Workstation* station = nullptr) { m_pNextStation = station; }
-
-		/// <returns>address of next Workstation</returns>
 		Workstation* getNextStation() const { return m_pNextStation; }
-
-		/// <summary>
-		/// inserts the name of the Item for which the current object is responsible into stream os following the format : ITEM_NAME-- > NEXT_ITEM_NAME
-		///
-		/// if the current object is the last Workstation in the assembly line this query inserts : ITEM_NAME-- > End of Line.
-		///
-		/// in either case, the message is terminated with \n
-		/// </summary>
-		/// <param name="os"></param>
 		void display(std::ostream& os) const;
-
-		/// <summary>
-		/// moves the CustomerOrder referenced in newOrder to the back of the queue
-		/// </summary>
-		/// <param name="newOrder"></param>
-		/// <returns></returns>
 		Workstation& operator+=(CustomerOrder&& newOrder);
 	 };
 }

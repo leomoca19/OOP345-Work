@@ -8,51 +8,39 @@
 #include "Workstation.h"
 using namespace std;
 namespace sdds {
-	std::deque<CustomerOrder>
-		g_pending,
-		g_completed,
-		g_incomplete;
-
 	void Workstation::fill(std::ostream& os)
 	{
 		if (!m_orders.empty())
-			m_orders.begin()->fillItem(*this, os);
+			m_orders.front().fillItem(*this, os);
 	}
 
 	bool Workstation::attemptToMoveOrder()
 	{
-		bool moved{};
 		if (!m_orders.empty()) {
-			if (m_orders.front().isItemFilled(getItemName())) {
-				if (!m_pNextStation) {
+			CustomerOrder& order = m_orders.front();
 
-					if (m_orders.front().isOrderFilled()) 
-						g_completed.push_back(move(m_orders.front()));
-					
-					else 
-						g_incomplete.push_back(move(m_orders.front()));
-
-					m_orders.pop_front();
-				}
-				else {
-					*m_pNextStation += move(m_orders.front());
-					m_orders.pop_front();
-				}
-				moved = true;
-			}
-			else if (getQuantity() == 0) {
+			if (order.isItemFilled(getItemName()) || !getQuantity()) {
 				if (!m_pNextStation) {
-					g_incomplete.push_back(move(m_orders.front()));
-					m_orders.pop_front();
+					if (order.isOrderFilled()) {
+						g_completed.push_back(std::move(order));
+						m_orders.pop_front();
+						return true;
+					}
+
+					else {
+						g_incomplete.push_back(std::move(order));
+						m_orders.pop_front();
+						return true;
+					}
 				}
-				else {
-					*m_pNextStation += move(m_orders.front());
-					m_orders.pop_front();
-				}
-				moved = true;
+
+				m_pNextStation->m_orders.push_back(std::move(order));
+				m_orders.pop_front();
+				return true;
 			}
 		}
-		return moved;
+
+		return false;
 	}
 
 	void Workstation::display(std::ostream& os) const
